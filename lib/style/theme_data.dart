@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///@Description:
 ///@Author:         @Mr.pan
@@ -19,28 +20,19 @@ class MyThemeData {
   //     EdgeInsets.symmetric(horizontal: 30.w);
 
   ///
-  static const primaryColor = Color(0xFF698DF1);
-
-  ///
-  static const backgroundColor = Color(0xFFF2F2F5);
+  static const seedColor = Color(0xFF3182F6);
 
   ///
   ThemeData get themeData => ThemeData(
-        // colorScheme: ColorScheme(
-        //   brightness: brightness,
-        //   primary: primary,
-        //   onPrimary: onPrimary,
-        //   secondary: secondary,
-        //   onSecondary: onSecondary,
-        //   error: error,
-        //   onError: onError,
-        //   background: background,
-        //   onBackground: onBackground,
-        //   surface: surface,
-        //   onSurface: onSurface,
-        // ),
-        scaffoldBackgroundColor: backgroundColor,
-        primaryColor: primaryColor,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seedColor,
+        ),
+        scaffoldBackgroundColor: Color(0xFFF3F8FF),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: seedColor,
+          foregroundColor: Colors.white,
+          shape: CircleBorder(),
+        ),
       );
 
 // ///

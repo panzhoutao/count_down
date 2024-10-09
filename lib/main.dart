@@ -6,6 +6,7 @@ import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/utils/local_utils.dart';
 import 'package:count_down/utils/log_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,16 @@ void main() {
   init().then((value) {
     runApp(MyApp());
   });
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+  ));
 }
 
 ///
 Future init() async {
+  await ScreenUtil.ensureScreenSize();
   await Global.instance.init();
 }
 
@@ -42,7 +49,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(375, 664),
       builder: (context , child) {
         return GetMaterialApp(
           scaffoldMessengerKey: _scaffoldMessengerKey,
@@ -52,8 +59,6 @@ class MyApp extends StatelessWidget {
             return child;
           },
           navigatorObservers: [BotToastNavigatorObserver()],
-          title: 'Clean robot',
-          onGenerateTitle: (context) => 'Clean robot',
           getPages: RoutersManager.getPages,
           routingCallback: RoutersManager.routingCallback,
           initialRoute: RoutersManager.splash,
