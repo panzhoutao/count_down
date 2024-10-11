@@ -20,7 +20,10 @@ class MyThemeData {
   //     EdgeInsets.symmetric(horizontal: 30.w);
 
   ///
-  static const seedColor = Color(0xFF3182F6);
+  var seedColor = Color(0xFF3182F6);
+
+  ///
+  var primaryPadding = EdgeInsets.symmetric(horizontal: 28.w);
 
   ///
   ThemeData get themeData => ThemeData(
