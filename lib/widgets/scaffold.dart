@@ -4,35 +4,45 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 ///
 class MyScaffold extends StatefulWidget {
-  MyScaffold({
+  const MyScaffold({
     super.key,
     this.appBar,
-    EdgeInsetsGeometry? padding,
     this.body,
     this.backgroundColor,
-  }) {
-    padding ??= MyThemeData.instance.primaryPadding;
-  }
+    this.padding,
+  });
 
+  ///
   final PreferredSizeWidget? appBar;
 
+  ///
   final Widget Function()? body;
 
+  ///
   final Color? backgroundColor;
+
+  ///
+  final EdgeInsetsGeometry? padding;
 
   @override
   State<MyScaffold> createState() => _MyScaffoldState();
 }
 
 class _MyScaffoldState extends State<MyScaffold> {
+  ///
+  late EdgeInsetsGeometry padding;
 
-  final EdgeInsetsGeometry? padding;
-
+  ///
   Future? futureBuilderFuture;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    padding = widget.padding ?? MyThemeData.instance.primaryPadding;
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     Scaffold scaffold = Scaffold(
       appBar: widget.appBar,
       backgroundColor: widget.backgroundColor,
@@ -40,7 +50,7 @@ class _MyScaffoldState extends State<MyScaffold> {
       body: FutureBuilder(
         future: futureBuilderFuture,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          debugPrint('${T.toString()} ${snapshot.connectionState}');
+          debugPrint('${snapshot.connectionState}');
 
           Widget view = Container();
 

@@ -1,6 +1,7 @@
-import 'package:count_down/router_manage.dart';
+import 'package:count_down/pages/home.dart';
+import 'package:count_down/widgets/cupertino_modal_sheet_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 ///
 class SplashPage extends StatefulWidget {
@@ -16,7 +17,19 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(milliseconds: 500),
       () {
-        Get.offAllNamed(RoutersManager.home);
+        // Get.offAllNamed(RoutersManager.home);
+        // showCupertinoModalSheet(
+        //   fullscreenDialog: false,
+        //   builder: (context) => HomePage(),
+        // );
+
+        Navigator.of(context).push(
+          CupertinoModalSheetRoute(
+            builder: ((context) => HomePage()),
+            isFullScreen: true,
+          ),
+          // (route) => false,
+        );
       },
     );
     super.initState();

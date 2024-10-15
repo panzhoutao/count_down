@@ -1,5 +1,9 @@
+import 'package:count_down/pages/settings/settings.dart';
+import 'package:count_down/router_manage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 ///
 class HomePage extends StatefulWidget {
@@ -13,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   ///
   Widget _buildBackground() {
     return Container(
-      height: 94.w,
+      height: 94,
       decoration: BoxDecoration(
           gradient: LinearGradient(
         colors: [
@@ -29,10 +33,23 @@ class _HomePageState extends State<HomePage> {
   ///
   Widget _buildSetting() {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        // Get.toNamed(RoutersManager.settings);
+        // Get.to(
+        //   () => SettingsPage(),
+        //   transition: Transition.native,
+        // );
+        // showCupertinoModalPopup(context: context, builder: builder)
+        // Navigator.of(context).push(CupertinoPageRoute(builder: builder));
+
+        showCupertinoModalSheet(
+          context: context,
+          builder: (context) => SettingsPage(),
+        );
+      },
       icon: Icon(
         Icons.settings,
-        size: 26.w,
+        size: 26,
         color: Colors.black,
       ),
     );
@@ -53,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   alignment: Alignment.topRight,
-                  margin: EdgeInsets.only(top: 20.w),
+                  margin: EdgeInsets.only(top: 20),
                   child: _buildSetting(),
                 ),
               ],
