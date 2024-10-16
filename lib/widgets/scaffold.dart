@@ -38,8 +38,13 @@ class _MyScaffoldState extends State<MyScaffold> {
   @override
   void initState() {
     padding = widget.padding ?? MyThemeData.instance.primaryPadding;
+
+    futureBuilderFuture = reloadData();
     super.initState();
   }
+
+  @protected
+  Future reloadData() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +71,7 @@ class _MyScaffoldState extends State<MyScaffold> {
                 // view = _errorWidget(snapshot.error);
                 view = Container();
               } else {
-                view = Padding(padding: padding!, child: widget.body?.call());
+                view = Padding(padding: padding, child: widget.body?.call());
               }
               break;
             default:

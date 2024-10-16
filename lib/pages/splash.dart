@@ -17,12 +17,6 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(milliseconds: 500),
       () {
-        // Get.offAllNamed(RoutersManager.home);
-        // showCupertinoModalSheet(
-        //   fullscreenDialog: false,
-        //   builder: (context) => HomePage(),
-        // );
-
         Navigator.of(context).push(
           CupertinoModalSheetRoute(
             builder: ((context) => HomePage()),

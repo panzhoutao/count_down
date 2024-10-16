@@ -21,7 +21,7 @@ dependencies:
   logger: 2.4.0
   shared_preferences: 2.3.2
   flutter_keyboard_visibility: 6.0.0
-
+  flutter_svg: 2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +31,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/settings_tag.svg
 
 flutter_intl:
   enabled: true

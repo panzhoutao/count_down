@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 ///
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
-  ///
-  Future? futureBuilderFuture;
 
   @override
   void initState() {
@@ -12,8 +10,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       postFrameCallback();
     });
-
-    futureBuilderFuture = reloadData();
   }
 
   @protected

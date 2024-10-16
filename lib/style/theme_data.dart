@@ -26,11 +26,14 @@ class MyThemeData {
   var primaryPadding = EdgeInsets.symmetric(horizontal: 28.w);
 
   ///
+  var backgroundColor = Color(0xFFF3F8FF);
+
+  ///
   ThemeData get themeData => ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: seedColor,
         ),
-        scaffoldBackgroundColor: Color(0xFFF3F8FF),
+        scaffoldBackgroundColor: backgroundColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: seedColor,
           foregroundColor: Colors.white,

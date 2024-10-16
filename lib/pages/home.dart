@@ -34,14 +34,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSetting() {
     return IconButton(
       onPressed: () {
-        // Get.toNamed(RoutersManager.settings);
-        // Get.to(
-        //   () => SettingsPage(),
-        //   transition: Transition.native,
-        // );
-        // showCupertinoModalPopup(context: context, builder: builder)
-        // Navigator.of(context).push(CupertinoPageRoute(builder: builder));
-
         showCupertinoModalSheet(
           context: context,
           builder: (context) => SettingsPage(),
