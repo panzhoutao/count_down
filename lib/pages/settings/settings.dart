@@ -1,4 +1,4 @@
-import 'package:count_down/pages/settings/sort_and_tag.dart';
+import 'package:count_down/pages/settings/sort_and_tag/sort_and_tag.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/router_manage.dart';
 import 'package:count_down/widgets/base_state.dart';

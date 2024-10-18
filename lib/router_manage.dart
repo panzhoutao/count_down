@@ -38,15 +38,16 @@ class RoutersManager {
 }
 
 ///
-Future<T?> showCupertinoModalSheet<T>(
-    {required BuildContext context,
-    required WidgetBuilder builder,
-    bool useRootNavigator = true,
-    RouteSettings? routeSettings,
-    bool fullscreenDialog = true,
-    bool barrierDismissible = true,
-    CupertinoModalSheetRouteTransition firstTransition =
-        CupertinoModalSheetRouteTransition.none}) {
+Future<T?> showCupertinoModalSheet<T>({
+  required BuildContext context,
+  required WidgetBuilder builder,
+  bool useRootNavigator = true,
+  RouteSettings? routeSettings,
+  bool fullscreenDialog = true,
+  bool barrierDismissible = true,
+  CupertinoModalSheetRouteTransition firstTransition =
+      CupertinoModalSheetRouteTransition.none,
+}) {
   return Navigator.of(context, rootNavigator: useRootNavigator).push(
     CupertinoModalSheetRoute<T>(
       builder: builder,
