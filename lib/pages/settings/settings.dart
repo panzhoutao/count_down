@@ -48,7 +48,7 @@ class _SettingsPageState extends BaseState<SettingsPage> {
         '设置',
         style: TextStyle(
           fontSize: 40.w,
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
