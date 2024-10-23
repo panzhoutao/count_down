@@ -1,6 +1,7 @@
 import 'package:count_down/pages/item/logic.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/widgets/base_state.dart';
+import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:count_down/widgets/page.dart';
 import 'package:count_down/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,11 @@ class _ItemPageState extends BaseState<ItemPage> {
 
   /// 选择日期
   void _selectDate() {
-    showBottomSheet(
-      context: context,
-      builder: () {},
+    Get.bottomSheet(
+      BottomSheetWidget(
+        title: '日期',
+        child: Container(),
+      ),
     );
   }
 
