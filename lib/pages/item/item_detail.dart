@@ -22,7 +22,12 @@ class _ItemPageState extends BaseState<ItemPage> {
   late ItemController _logic;
 
   /// 选择日期
-  void _selectDate() {}
+  void _selectDate() {
+    showBottomSheet(
+      context: context,
+      builder: () {},
+    );
+  }
 
   /// 选择时间
   void _selectTime() {}
