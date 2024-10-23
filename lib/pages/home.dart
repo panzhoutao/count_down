@@ -5,6 +5,7 @@ import 'package:count_down/widgets/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
+import 'package:get/get.dart';
 
 ///
 class HomePage extends StatefulWidget {
@@ -115,7 +116,15 @@ class _HomePageState extends State<HomePage> {
   Widget _buildList() {
     return ListView.separated(
       itemBuilder: (context, index) {
-        return Container();
+        return Container(
+          height: 74.w,
+          margin: EdgeInsets.symmetric(horizontal: 20.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.w),
+          ),
+          child: Container(),
+        );
       },
       separatorBuilder: (context, index) {
         return SizedBox(height: 10.w);
@@ -153,7 +162,11 @@ class _HomePageState extends State<HomePage> {
                   margin: EdgeInsets.only(top: 30.w),
                   child: _buildTags(),
                 ),
-                _buildList().expand(),
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.only(top: 20.w),
+                  child: _buildList(),
+                ).expand(),
               ],
             ),
           ),
