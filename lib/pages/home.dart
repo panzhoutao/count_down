@@ -4,6 +4,7 @@ import 'package:count_down/router_manage.dart';
 import 'package:count_down/widgets/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
 import 'package:get/get.dart';
 
@@ -117,13 +118,38 @@ class _HomePageState extends State<HomePage> {
     return ListView.separated(
       itemBuilder: (context, index) {
         return Container(
-          height: 74.w,
           margin: EdgeInsets.symmetric(horizontal: 20.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.w),
+          height: 74.w,
+          child: Slidable(
+            endActionPane: ActionPane(
+              motion: ScrollMotion(),
+              extentRatio: 0.2,
+              children: [
+                Spacer(),
+                Container(
+                  width: 53.w,
+                  height: 53.w,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                    },
+                  ),
+                ),
+              ],
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.w),
+              ),
+              child: Container(),
+            ),
           ),
-          child: Container(),
         );
       },
       separatorBuilder: (context, index) {
