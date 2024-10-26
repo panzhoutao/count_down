@@ -1,4 +1,4 @@
-import 'package:count_down/pages/home.dart';
+import 'package:count_down/pages/home/home.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/pages/splash.dart';
 import 'package:count_down/widgets/cupertino_modal_sheet_route.dart';

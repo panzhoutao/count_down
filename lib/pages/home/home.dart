@@ -1,3 +1,4 @@
+import 'package:count_down/pages/home/item.dart';
 import 'package:count_down/pages/item/item_detail.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/router_manage.dart';
@@ -142,13 +143,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.w),
-              ),
-              child: Container(),
-            ),
+            child: ItemWidget(),
           ),
         );
       },
