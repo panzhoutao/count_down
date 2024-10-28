@@ -1,3 +1,4 @@
+import 'package:count_down/entities/item_entity.dart';
 import 'package:count_down/pages/item/logic.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/widgets/base_state.dart';
@@ -12,7 +13,13 @@ import 'package:get/get.dart';
 /// 条目
 /// 添加 、详情
 class ItemPage extends StatefulWidget {
-  const ItemPage({super.key});
+  const ItemPage({
+    super.key,
+    this.entity,
+  });
+
+  ///
+  final ItemEntity? entity;
 
   @override
   State<ItemPage> createState() => _ItemPageState();
