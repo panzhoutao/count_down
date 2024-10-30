@@ -2,10 +2,13 @@ import 'package:count_down/entities/item_entity.dart';
 import 'package:count_down/pages/item/logic.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/widgets/base_state.dart';
-import 'package:count_down/widgets/bottom_sheet.dart';
-import 'package:count_down/widgets/date_picker.dart';
+import 'package:count_down/widgets/picker/date_picker.dart';
 import 'package:count_down/widgets/page.dart';
+import 'package:count_down/widgets/picker/repeat_picker.dart';
+import 'package:count_down/widgets/picker/tag_picker.dart';
+import 'package:count_down/widgets/picker/timing_reminder_picker.dart';
 import 'package:count_down/widgets/scaffold.dart';
+import 'package:count_down/widgets/picker/time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,20 +35,30 @@ class _ItemPageState extends BaseState<ItemPage> {
 
   /// 选择日期
   void _selectDate() {
-    showMyDatePicker();
+    showMyDatePicker().then((value) {
+      print(value);
+    });
   }
 
   /// 选择时间
-  void _selectTime() {}
+  void _selectTime() {
+    showMyTimePicker();
+  }
 
   /// 选择重复
-  void _selectRepeat() {}
+  void _selectRepeat() {
+    showMyRepeatPicker();
+  }
 
-  /// 选择定时提醒
-  void _selectTimingReminder() {}
+  /// 选择提前提醒
+  void _selectTimingReminder() {
+    showMyTimingReminderPicker();
+  }
 
   /// 选择标签
-  void _selectTag() {}
+  void _selectTag() {
+    showMySelectTagPicker();
+  }
 
   ///
   Widget _buildName() {
@@ -92,7 +105,7 @@ class _ItemPageState extends BaseState<ItemPage> {
             onTap: _selectRepeat,
           ),
           _listTile(
-            title: '定时提醒',
+            title: '提前提醒',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: '00:00',
             onTap: _selectTimingReminder,

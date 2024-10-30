@@ -10,6 +10,7 @@ class BottomSheetWidget extends StatefulWidget {
     super.key,
     required this.title,
     required this.child,
+    required this.onConfirm,
   });
 
   ///
@@ -17,6 +18,9 @@ class BottomSheetWidget extends StatefulWidget {
 
   ///
   final Widget child;
+
+  ///
+  final Function() onConfirm;
 
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
@@ -50,12 +54,16 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             child: Text('取消'),
           ).expand(),
           SizedBox(width: 43.w),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              widget.onConfirm();
+            },
             child: Text('确定'),
           ).expand(),
         ],
