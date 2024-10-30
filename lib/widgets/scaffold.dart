@@ -35,10 +35,13 @@ class _MyScaffoldState extends State<MyScaffold> {
   ///
   Future? futureBuilderFuture;
 
+  ///
+  late Color backgroundColor;
+
   @override
   void initState() {
     padding = widget.padding ?? MyThemeData.instance.primaryPadding;
-
+    backgroundColor = widget.backgroundColor ?? MyThemeData.instance.backgroundColor;
     futureBuilderFuture = reloadData();
     super.initState();
   }
@@ -50,7 +53,7 @@ class _MyScaffoldState extends State<MyScaffold> {
   Widget build(BuildContext context) {
     Scaffold scaffold = Scaffold(
       appBar: widget.appBar,
-      backgroundColor: widget.backgroundColor,
+      backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: false,
       body: FutureBuilder(
         future: futureBuilderFuture,
@@ -71,7 +74,12 @@ class _MyScaffoldState extends State<MyScaffold> {
                 // view = _errorWidget(snapshot.error);
                 view = Container();
               } else {
-                view = Padding(padding: padding, child: widget.body?.call());
+                view = Container(
+                  padding: padding,
+                  height: double.infinity,
+                  color: backgroundColor,
+                  child: widget.body?.call(),
+                );
               }
               break;
             default:

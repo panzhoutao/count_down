@@ -1,3 +1,5 @@
+import 'package:count_down/pages/add_tag/add_tag.dart';
+import 'package:count_down/router_manage.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +41,10 @@ class _SelectTagWidgetState extends State<SelectTagWidget> {
   Widget _buildAdd() {
     return GestureDetector(
       onTap: () {
-        print('添加标签');
+        showCupertinoModalSheet(
+          context: context,
+          builder: (context) => AddTagPage(),
+        );
       },
       child: _SelectTagWidget(
         icon: Icons.add,

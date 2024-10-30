@@ -1,4 +1,5 @@
 import 'package:count_down/pages/home/item.dart';
+import 'package:count_down/pages/item/item.dart';
 import 'package:count_down/pages/item/item_detail.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/router_manage.dart';
@@ -143,7 +144,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            child: ItemWidget(),
+            child: GestureDetector(
+              onTap: () {
+                showCupertinoModalSheet(
+                  context: context,
+                  builder: (context) => ItemDetailPage(),
+                );
+              },
+              child: ItemWidget(),
+            ),
           ),
         );
       },

@@ -1,183 +1,159 @@
-import 'package:count_down/entities/item_entity.dart';
-import 'package:count_down/pages/item/logic.dart';
-import 'package:count_down/res/assets_res.dart';
+import 'package:count_down/main.dart';
+import 'package:count_down/pages/home/home.dart';
+import 'package:count_down/style/theme_data.dart';
+import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
-import 'package:count_down/widgets/picker/date_picker.dart';
-import 'package:count_down/widgets/page.dart';
-import 'package:count_down/widgets/picker/repeat_picker.dart';
-import 'package:count_down/widgets/picker/tag_picker.dart';
-import 'package:count_down/widgets/picker/timing_reminder_picker.dart';
 import 'package:count_down/widgets/scaffold.dart';
-import 'package:count_down/widgets/picker/time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_utils_code/flutter_utils_code.dart';
 
-/// 条目
-/// 添加 、详情
-class ItemPage extends StatefulWidget {
-  const ItemPage({
-    super.key,
-    this.entity,
-  });
-
-  ///
-  final ItemEntity? entity;
+///
+class ItemDetailPage extends StatefulWidget {
+  const ItemDetailPage({super.key});
 
   @override
-  State<ItemPage> createState() => _ItemPageState();
+  State<ItemDetailPage> createState() => _ItemDetailPageState();
 }
 
-class _ItemPageState extends BaseState<ItemPage> {
+class _ItemDetailPageState extends BaseState<ItemDetailPage> {
   ///
-  late ItemController _logic;
-
-  /// 选择日期
-  void _selectDate() {
-    showMyDatePicker().then((value) {
-      print(value);
-    });
-  }
-
-  /// 选择时间
-  void _selectTime() {
-    showMyTimePicker();
-  }
-
-  /// 选择重复
-  void _selectRepeat() {
-    showMyRepeatPicker();
-  }
-
-  /// 选择提前提醒
-  void _selectTimingReminder() {
-    showMyTimingReminderPicker();
-  }
-
-  /// 选择标签
-  void _selectTag() {
-    showMySelectTagPicker();
+  Widget _buildImage() {
+    return Container();
   }
 
   ///
-  Widget _buildName() {
-    return TextField(
-      controller: _logic.nameController,
-      textAlign: TextAlign.center,
-      decoration: InputDecoration(
-        hintText: '请在这里输入事件名称',
+  Widget _buildShare() {
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(vertical: 20.w),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(),
+        child: Text('分享'),
       ),
     );
   }
 
   ///
-  Widget _buildContainer1() {
-    return _container(
-      Column(
-        children: [
-          _listTile(
-            title: '日期',
-            icon: AssetsRes.SETTINGS_TAG,
-            contentText: '2020',
-            onTap: _selectDate,
-          ),
-          _listTile(
-            title: '时间',
-            icon: AssetsRes.SETTINGS_TAG,
-            contentText: '00:00',
-            onTap: _selectTime,
-          ),
-        ],
-      ),
+  Widget _buildContent() {
+    return Text('距离 XXX 还有');
+  }
+
+  ///
+  Widget _buildCountDays() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20.w),
+      child: Text('1天'),
     );
   }
 
   ///
-  Widget _buildContainer2() {
-    return _container(
-      Column(
-        children: [
-          _listTile(
-            title: '重复',
-            icon: AssetsRes.SETTINGS_TAG,
-            contentText: '',
-            onTap: _selectRepeat,
-          ),
-          _listTile(
-            title: '提前提醒',
-            icon: AssetsRes.SETTINGS_TAG,
-            contentText: '00:00',
-            onTap: _selectTimingReminder,
-          ),
-          _listTile(
-            title: '标签',
-            icon: AssetsRes.SETTINGS_TAG,
-            contentText: '',
-            onTap: _selectTag,
-          ),
-        ],
-      ),
-    );
+  Widget _buildDate() {
+    return _container();
+  }
+
+  ///
+  Widget _buildRepeat() {
+    return _container();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AddPage(
-      onAdd: () {
-        _logic.save();
-      },
-      child: MyScaffold(
-        body: () {
-          return GetBuilder<ItemController>(
-            init: ItemController(),
-            builder: (controller) {
-              _logic = controller;
-              return Column(
-                children: [
-                  _buildName(),
-                  _buildContainer1(),
-                  _buildContainer2(),
-                ],
-              );
+    return MyScaffold(
+      padding: EdgeInsets.zero,
+      appBar: MyAppBar(
+        leftWidget: Container(),
+        rightWidget: GestureDetector(
+          onTap: () {},
+          child: PopupMenuButton<String>(
+            icon: Icon(Icons.more_horiz),
+            itemBuilder: (context) {
+              return <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  value: '置顶',
+                  child: Text('置顶'),
+                ),
+                PopupMenuItem<String>(
+                  value: '编辑',
+                  child: Text('编辑'),
+                ),
+                PopupMenuItem<String>(
+                  value: '完成',
+                  child: Text('完成'),
+                ),
+                PopupMenuItem<String>(
+                  value: '删除',
+                  child: Text('删除'),
+                ),
+              ];
             },
-          );
-        },
+          ),
+        ),
       ),
+      body: () {
+        return Column(
+          children: [
+            _buildImage(),
+            _buildContent(),
+            _buildCountDays(),
+            Row(
+              children: [
+                _buildDate().expand(),
+                SizedBox(width: 23.w),
+                _buildRepeat().expand(),
+              ],
+            ).padding(MyThemeData.instance.primaryPadding),
+            Spacer(),
+            _buildShare(),
+          ],
+        );
+      },
     );
   }
 }
 
 ///
-Widget _container(Widget child) {
+Widget _container() {
   return Container(
-    // padding: EdgeInsets.symmetric(horizontal: 30.w),
-    margin: EdgeInsets.only(top: 20.w),
+    height: 76.w,
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: Color(0xFFE2EEFF),
       borderRadius: BorderRadius.circular(16.w),
     ),
-    child: child,
-  );
-}
-
-///
-Widget _listTile({
-  required String title,
-  required String icon,
-  required String contentText,
-  required Function() onTap,
-}) {
-  return ListTile(
-    leading: SvgPicture.asset(icon),
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(contentText),
-        Icon(Icons.arrow_drop_down),
+        Container(
+          width: 85.w,
+          height: 34.w,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF599BF9),
+                Color(0xFFAFDDFF),
+              ],
+            ),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16.w),
+              bottomRight: Radius.circular(16.w),
+            ),
+          ),
+          child: Text(
+            '目标日期',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.only(left: 12.w),
+          child: Text('2023-01-01'),
+        ).expand(),
       ],
     ),
-    title: Text(title),
-    onTap: onTap,
   );
 }
