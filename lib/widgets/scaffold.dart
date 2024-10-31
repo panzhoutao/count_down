@@ -9,7 +9,7 @@ class MyScaffold extends StatefulWidget {
     this.appBar,
     this.body,
     this.backgroundColor,
-    this.padding,
+    this.padding, this.floatingActionButton,
   });
 
   ///
@@ -23,6 +23,9 @@ class MyScaffold extends StatefulWidget {
 
   ///
   final EdgeInsetsGeometry? padding;
+
+  ///
+  final Widget? floatingActionButton;
 
   @override
   State<MyScaffold> createState() => _MyScaffoldState();
@@ -55,6 +58,7 @@ class _MyScaffoldState extends State<MyScaffold> {
       appBar: widget.appBar,
       backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: false,
+      floatingActionButton: widget.floatingActionButton,
       body: FutureBuilder(
         future: futureBuilderFuture,
         builder: (BuildContext context, AsyncSnapshot snapshot) {

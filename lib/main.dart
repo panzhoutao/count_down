@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:count_down/db/db_manager.dart';
 import 'package:count_down/generated/l10n.dart';
 import 'package:count_down/global.dart';
 import 'package:count_down/router_manage.dart';
@@ -26,6 +27,7 @@ void main() {
 Future init() async {
   await ScreenUtil.ensureScreenSize();
   await Global.instance.init();
+  await DbManager().openDb();
 }
 
 class MyApp extends StatelessWidget {

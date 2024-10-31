@@ -21,7 +21,6 @@ class SortAndTagController extends GetxController {
       {'name': '3'},
       {'name': '4'},
     ]);
-    Log.i('22222---- ${data.length}');
 
     update();
   }

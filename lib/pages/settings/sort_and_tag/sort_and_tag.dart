@@ -1,4 +1,6 @@
+import 'package:count_down/pages/add_tag/add_tag.dart';
 import 'package:count_down/pages/settings/sort_and_tag/logic.dart';
+import 'package:count_down/router_manage.dart';
 import 'package:count_down/utils/log_util.dart';
 import 'package:count_down/widgets/base_state.dart';
 import 'package:count_down/widgets/page.dart';
@@ -84,6 +86,15 @@ class _SortAndTagPageState extends BaseState<SortAndTagPage> {
       child: MyScaffold(
         appBar: WidgetExtends.appBar(
           title: '分类与标签',
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showCupertinoModalSheet(
+              context: context,
+              builder: (context) => AddTagPage(),
+            );
+          },
+          child: const Icon(Icons.add),
         ),
         body: () {
           return GetBuilder<SortAndTagController>(
