@@ -1,5 +1,6 @@
 import 'package:count_down/db/db_manager.dart';
 import 'package:count_down/generated/json/base/json_field.dart';
+import '../generated/json/base/json_convert_content.dart';
 
 @JsonSerializable()
 class DbTagEntity {
@@ -18,20 +19,15 @@ class DbTagEntity {
 
   ///
   factory DbTagEntity.fromSqlRaw(Map<String, dynamic> json) {
-    final DbTagEntity dbCleanTaskEntity = DbTagEntity();
-    // final int? id = jsonConvert.convert<int>(json['id']);
-    // if (id != null) {
-    //   dbCleanTaskEntity.id = id;
-    // }
-    // final int? status = jsonConvert.convert<int>(json['status']);
-    // if (status != null) {
-    //   dbCleanTaskEntity.status = status;
-    // }
-    // final CleanTaskEntity? data =
-    // jsonConvert.convert<CleanTaskEntity>(jsonDecode(json['data']));
-    // if (data != null) {
-    //   dbCleanTaskEntity.data = data;
-    // }
-    return dbCleanTaskEntity;
+    final dbTagEntity = DbTagEntity();
+    final int? id = jsonConvert.convert<int>(json['id']);
+    if (id != null) {
+      dbTagEntity.id = id;
+    }
+    final String? name = jsonConvert.convert<String>(json['name']);
+    if (name != null) {
+      dbTagEntity.name = name;
+    }
+    return dbTagEntity;
   }
 }

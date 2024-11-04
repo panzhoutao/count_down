@@ -9,12 +9,12 @@ class SortAndTagController extends GetxController {
 
   @override
   void onInit() {
-    _getData();
+    getData();
     super.onInit();
   }
 
   ///
-  void _getData() {
+  void getData() {
     data.addAll([
       {'name': '1'},
       {'name': '2'},
