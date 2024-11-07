@@ -1,9 +1,10 @@
-import 'package:count_down/router_manage.dart';
+import 'package:count_down/pages/add_tag/logic.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
 import 'package:count_down/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 ///
 class AddTagPage extends StatefulWidget {
@@ -14,9 +15,16 @@ class AddTagPage extends StatefulWidget {
 }
 
 class _AddTagPageState extends BaseState<AddTagPage> {
+  ///
+  final _logic = Get.put(AddTagLogic());
+
+  ///
+  final _textController = TextEditingController();
+
   /// 输入框 , 白色背景 ， 圆角
   Widget _buildInput() {
     return TextField(
+      controller: _textController,
       decoration: InputDecoration(
         hintText: '请输入标签名称',
         filled: true,
@@ -36,7 +44,11 @@ class _AddTagPageState extends BaseState<AddTagPage> {
         rightWidget: GestureDetector(
           onTap: () {},
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_textController.text.isNotEmpty) {
+                _logic.addTag(_textController.text);
+              }
+            },
             child: Text('添加'),
           ),
         ),
