@@ -2,6 +2,9 @@ import 'package:count_down/pages/home/home.dart';
 import 'package:count_down/widgets/cupertino_modal_sheet_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../services/tag_service.dart';
 
 ///
 class SplashPage extends StatefulWidget {
@@ -14,6 +17,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
+    Get.put(TagService());
     Future.delayed(
       const Duration(milliseconds: 500),
       () {

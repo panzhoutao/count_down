@@ -3,20 +3,43 @@ import 'package:get/get.dart';
 import '../db/db_manager.dart';
 
 ///
-interface class TegListener {
-
-}
+interface class TagListener {}
 
 ///
 class TagService extends GetxService {
   static TagService get to => Get.find();
 
   ///
-  List<DbTagEntity> tagList = [];
+  var tagList = <DbTagEntity>[].obs;
+
+  @override
+  void onInit() {
+    updateTagList();
+    super.onInit();
+  }
 
   ///
-  Future<bool> addTag(String value) {
+  Future<bool> addTag(String value) async {
     var tag = DbTagEntity()..name = value;
-    return DbManager.instance.tagDao.insert(tag);
+    bool result = await DbManager.instance.tagDao.insert(tag);
+    updateTagList();
+    return result;
+  }
+
+  ///
+  void updateTagList() async {
+    tagList.assignAll(await getTagList());
+  }
+
+  ///
+  Future<List<DbTagEntity>> getTagList() async {
+    return await DbManager.instance.tagDao.queryAll();
+  }
+
+  ///
+  Future<bool> deleteTag(DbTagEntity tag) async {
+    bool result = await DbManager.instance.tagDao.delete(tag);
+    updateTagList();
+    return result;
   }
 }

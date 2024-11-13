@@ -1,33 +1,18 @@
 import 'package:count_down/utils/log_util.dart';
 import 'package:get/get.dart';
 
+import '../../../entities/tag_entity.dart';
+import '../../../services/tag_service.dart';
+
 ///
 class SortAndTagController extends GetxController {
-
-  ///
-  List data = [];
-
   @override
   void onInit() {
-    getData();
     super.onInit();
   }
 
   ///
-  void getData() {
-    data.addAll([
-      {'name': '1'},
-      {'name': '2'},
-      {'name': '3'},
-      {'name': '4'},
-    ]);
-
-    update();
+  void delete(DbTagEntity tag) {
+    TagService.to.deleteTag(tag);
   }
-
-  ///
-  void delete(int index) {
-
-  }
-
 }
