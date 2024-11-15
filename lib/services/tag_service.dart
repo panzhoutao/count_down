@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import '../db/db_manager.dart';
 
 ///
-interface class TagListener {}
-
-///
 class TagService extends GetxService {
   static TagService get to => Get.find();
 

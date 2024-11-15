@@ -1,10 +1,8 @@
-import 'package:count_down/entities/item_entity.dart';
-import 'package:count_down/pages/item/logic.dart';
+import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
 import 'package:count_down/widgets/picker/date_picker.dart';
-import 'package:count_down/widgets/page.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:count_down/widgets/picker/tag_picker.dart';
 import 'package:count_down/widgets/picker/timing_reminder_picker.dart';
@@ -14,30 +12,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'logic.dart';
 
 /// 条目
 /// 添加 、详情
-class ItemPage extends StatefulWidget {
-  const ItemPage({
+class EditCountdownPage extends StatefulWidget {
+  const EditCountdownPage({
     super.key,
     this.entity,
   });
 
   ///
-  final ItemEntity? entity;
+  final DbCountdownEntity? entity;
 
   @override
-  State<ItemPage> createState() => _ItemPageState();
+  State<EditCountdownPage> createState() => _EditCountdownPageState();
 }
 
-class _ItemPageState extends BaseState<ItemPage> {
+class _EditCountdownPageState extends BaseState<EditCountdownPage> {
   ///
-  late ItemController _logic;
+  late EditCountdownController _logic;
+
+  ///
+  var nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   /// 选择日期
   void _selectDate() {
     showMyDatePicker().then((value) {
-      print(value);
+      if (value != null) {
+        _logic.setDate(value);
+      }
     });
   }
 
@@ -64,7 +73,10 @@ class _ItemPageState extends BaseState<ItemPage> {
   ///
   Widget _buildName() {
     return TextField(
-      controller: _logic.nameController,
+      controller: nameController,
+      onChanged: (value) {
+        _logic.setName(value);
+      },
       textAlign: TextAlign.center,
       decoration: InputDecoration(
         hintText: '请在这里输入事件名称',
@@ -84,7 +96,7 @@ class _ItemPageState extends BaseState<ItemPage> {
             onTap: _selectDate,
           ),
           _listTile(
-            title: '时间',
+            title: '提醒时间',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: '00:00',
             onTap: _selectTime,
@@ -137,8 +149,8 @@ class _ItemPageState extends BaseState<ItemPage> {
         ),
       ),
       body: () {
-        return GetBuilder<ItemController>(
-          init: ItemController(),
+        return GetBuilder<EditCountdownController>(
+          init: EditCountdownController(widget.entity),
           builder: (controller) {
             _logic = controller;
             return Column(

@@ -10,17 +10,17 @@ class FlatWheelScrollView extends StatefulWidget {
   ///
   /// [controller] Scroll controller for [FlatScrollPhysics].
   ///
-  /// [physics] Makes sure we always land on a particular item after scrolling.
+  /// [physics] Makes sure we always land on a particular countdown after scrolling.
   ///
   /// [scrollBehavior] Scroll behavior for [FlatWheelScrollView].
   ///
-  /// [itemExtent] Maximum size of an item in the main axis.
+  /// [itemExtent] Maximum size of an countdown in the main axis.
   ///
   /// [itemCount] Total items to render for the [FlatWheelScrollView].
   ///
   /// [looping] Whether to create an infinite scroll loop of the items in the [FlatWheelScrollView].
   ///
-  /// [onSelectedItemChanged] Callback fired when an item is changed.
+  /// [onSelectedItemChanged] Callback fired when an countdown is changed.
   ///
   /// [itemBuilder] To lazily build items on the viewport.
   const FlatWheelScrollView({
@@ -38,14 +38,14 @@ class FlatWheelScrollView extends StatefulWidget {
   /// Scroll controller for [FlatScrollPhysics].
   final ScrollController? controller;
 
-  /// [FlatScrollPhysics], which makes sure we always land on a particular item after scrolling.
+  /// [FlatScrollPhysics], which makes sure we always land on a particular countdown after scrolling.
   /// This is the `default` physics for [FlatWheelScrollView].
   final ScrollPhysics? physics;
 
   /// Scroll behavior for [FlatWheelScrollView].
   final ScrollBehavior? scrollBehavior;
 
-  /// Maximum size of an item in the main axis.
+  /// Maximum size of an countdown in the main axis.
   final double itemExtent;
 
   /// Total items to render for the [FlatWheelScrollView].
@@ -54,12 +54,12 @@ class FlatWheelScrollView extends StatefulWidget {
   /// Whether to create an infinite scroll loop of the items in the [FlatWheelScrollView].
   final bool looping;
 
-  /// Callback fired when an item is changed.
+  /// Callback fired when an countdown is changed.
   final ValueChanged<int>? onSelectedItemChanged;
 
   /// To lazily build items on the viewport.
   ///
-  /// If [looping] is true, two indexes are rendered by the item builder; `forward` and `reverse` items.
+  /// If [looping] is true, two indexes are rendered by the countdown builder; `forward` and `reverse` items.
   ///
   /// Otherwise, only the `forward` index is rendered.
   final Widget Function(BuildContext context, int itemIndex) itemBuilder;
@@ -202,7 +202,7 @@ class FlatMetrics extends FixedScrollMetrics {
     );
   }
 
-  // The scroll view's currently selected item index
+  // The scroll view's currently selected countdown index
   final int itemIndex;
 }
 
@@ -297,7 +297,7 @@ class FlatScrollController extends ScrollController {
 
   int get selectedItem => (position as _FlatScrollPosition).itemIndex;
 
-  /// Animate to a specific item index
+  /// Animate to a specific countdown index
   Future<void> animateToItem(
     int itemIndex, {
     required Duration duration,
@@ -317,7 +317,7 @@ class FlatScrollController extends ScrollController {
     ]);
   }
 
-  /// Jumpt to a specific item index
+  /// Jumpt to a specific countdown index
   void jumpToItem(int itemIndex) {
     for (final _FlatScrollPosition position in positions.cast<_FlatScrollPosition>()) {
       position.jumpTo(itemIndex * position.itemExtent);
@@ -374,7 +374,7 @@ class FlatScrollPhysics extends ScrollPhysics {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
-    // From the natural final position, find the nearest item it should have
+    // From the natural final position, find the nearest countdown it should have
     // settled to.
     final int settlingItemIndex = _getItemFromOffset(
       offset: testFrictionSimulation?.x(double.infinity) ?? metrics.pixels,
@@ -393,7 +393,7 @@ class FlatScrollPhysics extends ScrollPhysics {
     }
 
     // Scenario 4:
-    // If we're going to end back at the same item because initial velocity
+    // If we're going to end back at the same countdown because initial velocity
     // is too low to break past it, use a spring simulation to get back.
     if (settlingItemIndex == metrics.itemIndex) {
       return SpringSimulation(
@@ -407,7 +407,7 @@ class FlatScrollPhysics extends ScrollPhysics {
 
     // Scenario 5:
     // Create a new friction simulation except the drag will be tweaked to land
-    // exactly on the item closest to the natural stopping point.
+    // exactly on the countdown closest to the natural stopping point.
     return FrictionSimulation.through(
       metrics.pixels,
       settlingPixels,

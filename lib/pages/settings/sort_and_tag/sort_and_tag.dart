@@ -2,7 +2,6 @@ import 'package:count_down/pages/add_tag/add_tag.dart';
 import 'package:count_down/pages/settings/sort_and_tag/logic.dart';
 import 'package:count_down/router_manage.dart';
 import 'package:count_down/services/tag_service.dart';
-import 'package:count_down/utils/log_util.dart';
 import 'package:count_down/widgets/base_state.dart';
 import 'package:count_down/widgets/page.dart';
 import 'package:count_down/widgets/scaffold.dart';

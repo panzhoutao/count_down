@@ -1,14 +1,12 @@
+import 'package:count_down/pages/countdown/edit_countdown.dart';
+import 'package:count_down/pages/countdown/item_detail.dart';
 import 'package:count_down/pages/home/item.dart';
-import 'package:count_down/pages/item/item.dart';
-import 'package:count_down/pages/item/item_detail.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/router_manage.dart';
-import 'package:count_down/widgets/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
-import 'package:get/get.dart';
 
 ///
 class HomePage extends StatefulWidget {
@@ -56,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   void _addItem() {
     showCupertinoModalSheet(
       context: context,
-      builder: (context) => ItemPage(),
+      builder: (context) => EditCountdownPage(),
     );
   }
 

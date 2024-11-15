@@ -10,9 +10,9 @@ class FlatScrollWheel extends StatefulWidget {
   ///
   /// [items] Total items to render for the [FlatScrollWheel].
   ///
-  /// [selectedIndex] Selected index of a specific [FlatScrollWheel]'s item.
+  /// [selectedIndex] Selected index of a specific [FlatScrollWheel]'s countdown.
   ///
-  /// [onSelectedItemChanged] Callback fired when an item is changed.
+  /// [onSelectedItemChanged] Callback fired when an countdown is changed.
   ///
   /// [looping] Whether to create an infinite scroll loop of the items in the [FlatScrollWheel].
   ///
@@ -38,10 +38,10 @@ class FlatScrollWheel extends StatefulWidget {
   /// Total items to render for the [FlatScrollWheel].
   final List<String> items;
 
-  /// Selected index of a specific [FlatScrollWheel]'s item.
+  /// Selected index of a specific [FlatScrollWheel]'s countdown.
   final int selectedIndex;
 
-  /// Callback fired when an item is changed.
+  /// Callback fired when an countdown is changed.
   final Function(int value)? onSelectedItemChanged;
 
   /// Whether to create an infinite scroll loop of the items in the [FlatScrollWheel].
@@ -59,10 +59,10 @@ class FlatScrollWheel extends StatefulWidget {
   /// Describes how [Scrollable] widgets should behave.
   final ScrollBehavior? scrollBehavior;
 
-  /// Add an offset to the start of the item selection list.
+  /// Add an offset to the start of the countdown selection list.
   final int? startOffset;
 
-  /// Add an offset to the end of the item selection list.
+  /// Add an offset to the end of the countdown selection list.
   final int? lastOffset;
 
   @override
@@ -92,17 +92,17 @@ class _FlatScrollWheelState extends State<FlatScrollWheel> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // If `listenAfterAnimation` is enabled, listen when select item is changed.
+      // If `listenAfterAnimation` is enabled, listen when select countdown is changed.
       if (widget.listenAfterAnimation) {
         _controller.position.isScrollingNotifier.addListener(_handleOnSelectedItemChanged);
       }
 
-      // If `startOffset` is specified, listen on item changed and animate towards the nearest item that is not part of the offset items.
+      // If `startOffset` is specified, listen on countdown changed and animate towards the nearest countdown that is not part of the offset items.
       if (widget.startOffset != null) {
         _controller.position.isScrollingNotifier.addListener(() => _handleOffset(_startOffsets));
       }
 
-      // If `lastOffset` is specified, listen on item changed and animate towards the nearest item that is not part of the offset items.
+      // If `lastOffset` is specified, listen on countdown changed and animate towards the nearest countdown that is not part of the offset items.
       if (widget.lastOffset != null) {
         _controller.position.isScrollingNotifier.addListener(() => _handleOffset(_lastOffsets));
       }
@@ -113,7 +113,7 @@ class _FlatScrollWheelState extends State<FlatScrollWheel> {
   void didUpdateWidget(covariant FlatScrollWheel oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Jump to an item if the `selectedIndex` is changed or the `items lenght` is changed.
+    // Jump to an countdown if the `selectedIndex` is changed or the `items lenght` is changed.
     if (oldWidget.items.length != widget.items.length || oldWidget.selectedIndex != widget.selectedIndex) {
       _controller.jumpToItem(widget.selectedIndex);
     }
@@ -170,12 +170,12 @@ class _FlatScrollWheelState extends State<FlatScrollWheel> {
     }
   }
 
-  /// Handles the boundary of the selection when item(s) are part of the `startOffsets` or `lastOffsets`.
+  /// Handles the boundary of the selection when countdown(s) are part of the `startOffsets` or `lastOffsets`.
   void _handleOffset(List<int> offsets) async {
     // Not do anything if it is scrolling.
     if (_controller.position.isScrollingNotifier.value) return;
 
-    // Check whether the current selected item is in the `startOffsets` or `lastOffsets`. Return the value if its true and -1 if not.
+    // Check whether the current selected countdown is in the `startOffsets` or `lastOffsets`. Return the value if its true and -1 if not.
     final value = offsets.firstWhere((i) => _controller.selectedItem % widget.items.length == i, orElse: () => -1);
 
     // Wait for 800 milliseconds before continuing.
@@ -190,10 +190,10 @@ class _FlatScrollWheelState extends State<FlatScrollWheel> {
       // Check if the index is greater than or equal to the half size.
       // If so, return the difference between the offset list size minus the index.
       // Otherwise, return the index + 1 in negative value.
-      // To put it simply, we are doing this to animate towards the nearest item that is outside of the offset list.
+      // To put it simply, we are doing this to animate towards the nearest countdown that is outside of the offset list.
       final addOffset = index >= halfSize ? offsets.length - index : -(index + 1);
 
-      // Using the `addOffset`, animate towards the nearest item by the adding the current selected item index with the `addOffset` value.
+      // Using the `addOffset`, animate towards the nearest countdown by the adding the current selected countdown index with the `addOffset` value.
       _controller.animateToItem(
         _controller.selectedItem + addOffset,
         duration: const Duration(milliseconds: 500),
@@ -204,7 +204,7 @@ class _FlatScrollWheelState extends State<FlatScrollWheel> {
 
   /// Handles the text(s) to mute that are within the `startOffset` and `lastOffset`.
   TextStyle? _handleTextStyle(int itemIndex) {
-    // If `_startOffsets` or `_lastOffsets` contains the current `itemIndex`, then mute the item. Otherwise, use the default text style.
+    // If `_startOffsets` or `_lastOffsets` contains the current `itemIndex`, then mute the countdown. Otherwise, use the default text style.
     if (_startOffsets.contains(itemIndex) || _lastOffsets.contains(itemIndex)) {
       return widget.textStyle?.copyWith(color: widget.textStyle?.color?.withOpacity(0.2));
     } else {

@@ -1,6 +1,6 @@
 import 'package:count_down/db/db_manager.dart';
+import 'package:count_down/generated/json/base/json_convert_content.dart';
 import 'package:count_down/generated/json/base/json_field.dart';
-import '../generated/json/base/json_convert_content.dart';
 
 @JsonSerializable()
 class DbTagEntity {
@@ -8,6 +8,9 @@ class DbTagEntity {
 
   int? id;
   String? name;
+
+  ///
+  factory DbTagEntity.fromJson(Map<String, dynamic> json) => DbTagEntity();
 
   ///
   Map<String, Object?> toSqlRaw() {
