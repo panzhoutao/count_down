@@ -11,11 +11,26 @@ class EditCountdownController extends GetxController {
   DbCountdownEntity? entity;
 
   ///
-  DateTime get dateTime => DateTime.parse(entity!.dateTime!);
+  DateTime get _dateTime => DateTime.parse(entity!.dateTime!);
+
+  ///
+  String get dateText => formatDate(_dateTime, [yyyy, '-', mm, '-', dd]);
+
+  ///
+  String get timeText {
+    if (entity?.isAllDay ?? true) {
+      return '全天';
+    } else {
+      return formatDate(_dateTime, [HH, ':', nn]);
+    }
+  }
 
   @override
   void onInit() {
-    entity ??= DbCountdownEntity();
+    entity ??= DbCountdownEntity(
+      dateTime: _formatDate(DateTime.now().copyWith(hour: 0, minute: 0)),
+      isAllDay: true,
+    );
     super.onInit();
   }
 
@@ -27,19 +42,22 @@ class EditCountdownController extends GetxController {
   ///
   void setDate(DateTime value) {
     entity?.dateTime = _formatDate(
-      dateTime.copyWith(year: value.year, month: value.month, day: value.day),
+      _dateTime.copyWith(year: value.year, month: value.month, day: value.day),
     );
     update();
   }
 
   ///
-  void setTime(Duration value) {
-    entity?.dateTime = _formatDate(
-      dateTime.copyWith(
-        hour: value.inHours,
-        minute: value.inMinutes % Duration.secondsPerMinute,
-      ),
-    );
+  void setTime({bool isAllDay = false, Duration? value}) {
+    entity?.isAllDay = isAllDay;
+    if (!isAllDay && value != null) {
+      entity?.dateTime = _formatDate(
+        _dateTime.copyWith(
+          hour: value.inHours,
+          minute: value.inMinutes % Duration.secondsPerMinute,
+        ),
+      );
+    }
     update();
   }
 

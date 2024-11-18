@@ -8,8 +8,11 @@ class DbCountdownEntity {
   ///
   String? name;
 
-  ///
+  /// 日期时间
   String? dateTime;
+
+  /// 是否全天
+  bool? isAllDay;
 
   /// 重复
   String? repeat;
@@ -28,6 +31,7 @@ class DbCountdownEntity {
     this.id,
     this.name,
     this.dateTime,
+    this.isAllDay,
     this.repeat,
     this.timing,
     this.tagId,

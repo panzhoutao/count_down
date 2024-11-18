@@ -1,3 +1,4 @@
+import 'package:count_down/utils/log_util.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:count_down/widgets/picker/picker.dart';
 import 'package:flutter/material.dart';
@@ -5,15 +6,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 ///
-Future<Duration?> showMyTimePicker({Duration? selectedTime}) {
-  selectedTime ??= Duration(hours: 9);
-  return Get.bottomSheet<Duration?>(
+typedef OnMyTimerPicker = void Function(bool isAllDay, [Duration? value]);
+
+///
+void showMyTimePicker({OnMyTimerPicker? onPicker}) {
+  DayTimeType type = DayTimeType.all;
+  Duration? duration;
+  Get.bottomSheet(
     BottomSheetWidget(
       title: '时间',
       onConfirm: () {
-        Get.backLegacy(result: selectedTime);
+        onPicker?.call(type == DayTimeType.all, duration);
+        Get.backLegacy();
       },
-      child: MyTimePickerWidget(),
+      child: MyTimePickerWidget(
+        onTypeChanged: (DayTimeType value) {
+          type = value;
+        },
+        onDurationChanged: (Duration value) {
+          duration = value;
+        },
+      ),
     ),
   );
 }
@@ -26,7 +39,17 @@ enum DayTimeType {
 
 ///
 class MyTimePickerWidget extends StatefulWidget {
-  const MyTimePickerWidget({super.key});
+  const MyTimePickerWidget({
+    super.key,
+    required this.onTypeChanged,
+    required this.onDurationChanged,
+  });
+
+  ///
+  final Function(DayTimeType type) onTypeChanged;
+
+  ///
+  final Function(Duration duration) onDurationChanged;
 
   @override
   State<MyTimePickerWidget> createState() => _MyTimePickerWidgetState();
@@ -51,7 +74,12 @@ class _MyTimePickerWidgetState extends State<MyTimePickerWidget> {
           (int index) => '$index',
           growable: true,
         ),
-        onChanged: (List<String> value) {},
+        onChanged: (List<String> value) {
+          widget.onDurationChanged(Duration(
+            hours: int.parse(value[0]),
+            minutes: int.parse(value[1]),
+          ));
+        },
       ),
     );
   }
@@ -91,6 +119,7 @@ class _MyTimePickerWidgetState extends State<MyTimePickerWidget> {
             setState(() {
               _type = DayTimeType.all;
             });
+            widget.onTypeChanged(_type);
           },
         ),
         _typeWidget(
@@ -100,6 +129,7 @@ class _MyTimePickerWidgetState extends State<MyTimePickerWidget> {
             setState(() {
               _type = DayTimeType.time;
             });
+            widget.onTypeChanged(_type);
           },
         ),
       ],

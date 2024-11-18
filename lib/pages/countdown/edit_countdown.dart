@@ -52,7 +52,11 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 
   /// 选择时间
   void _selectTime() {
-    showMyTimePicker();
+    showMyTimePicker(
+      onPicker: (bool isAllDay, [Duration? value]) {
+        _logic.setTime(isAllDay: isAllDay, value: value);
+      },
+    );
   }
 
   /// 选择重复
@@ -92,13 +96,13 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
           _listTile(
             title: '日期',
             icon: AssetsRes.SETTINGS_TAG,
-            contentText: '2020',
+            contentText: _logic.dateText,
             onTap: _selectDate,
           ),
           _listTile(
             title: '提醒时间',
             icon: AssetsRes.SETTINGS_TAG,
-            contentText: '00:00',
+            contentText: _logic.timeText,
             onTap: _selectTime,
           ),
         ],

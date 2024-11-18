@@ -18,7 +18,7 @@ dependencies:
   get: 5.0.0-release-candidate-9.2.1
   flutter_screenutil: 5.9.3
   bot_toast: 4.1.3
-  logger: 2.4.0
+  logger: 2.5.0
   shared_preferences: 2.3.3
   flutter_keyboard_visibility: 6.0.0
   flutter_svg: 2.0.14
