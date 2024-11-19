@@ -10,7 +10,7 @@ class MyPickerWidget extends StatefulWidget {
     super.key,
     required this.items1,
     required this.items2,
-    required this.onChanged,
+    required this.onChangedIndex,
     this.looping = true,
   });
 
@@ -21,7 +21,7 @@ class MyPickerWidget extends StatefulWidget {
   final List<String> items2;
 
   ///
-  final ValueChanged<List<String>> onChanged;
+  final ValueChanged<List<int>> onChangedIndex;
 
   ///
   final bool looping;
@@ -35,10 +35,10 @@ class _MyPickerWidgetState extends State<MyPickerWidget> {
   late ScrollWheelDatePickerTheme theme;
 
   ///
-  late String _selectedItem1;
+  int _selectedIndex1 = 0;
 
   ///
-  late String _selectedItem2;
+  int _selectedIndex2 = 0;
 
   @override
   void initState() {
@@ -53,14 +53,12 @@ class _MyPickerWidgetState extends State<MyPickerWidget> {
       overAndUnderCenterOpacity: 0.4,
     );
 
-    _selectedItem1 = widget.items1.first;
-    _selectedItem2 = widget.items2.first;
     super.initState();
   }
 
   ///
   void _onSelectedItemChanged() {
-    widget.onChanged.call([_selectedItem1, _selectedItem2]);
+    widget.onChangedIndex.call([_selectedIndex1, _selectedIndex2]);
   }
 
   ///
@@ -118,7 +116,7 @@ class _MyPickerWidgetState extends State<MyPickerWidget> {
                 Expanded(
                   child: _scrollWidget(
                     controllerItemChanged: (value) {
-                      _selectedItem1 = widget.items1[value];
+                      _selectedIndex1 = value;
                       _onSelectedItemChanged();
                     },
                     items: widget.items1,
@@ -127,7 +125,7 @@ class _MyPickerWidgetState extends State<MyPickerWidget> {
                 Expanded(
                   child: _scrollWidget(
                     controllerItemChanged: (value) {
-                      _selectedItem2 = widget.items2[value];
+                      _selectedIndex2 = value;
                       _onSelectedItemChanged();
                     },
                     items: widget.items2,

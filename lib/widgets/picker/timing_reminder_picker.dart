@@ -1,19 +1,27 @@
+import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
-import 'package:count_down/widgets/picker/picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 ///
-Future<Duration?> showMyTimingReminderPicker() {
-  return Get.bottomSheet<Duration?>(
+void showRemindAdvancePicker(Function(int? value) onConfirm) {
+  int? selected;
+  Get.bottomSheet(
     BottomSheetWidget(
       title: '提前提醒',
-      onConfirm: () {},
+      onConfirm: () {
+        onConfirm(selected);
+        Get.backLegacy();
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 38),
-        child: TimingReminderPickerWidget(),
+        child: TimingReminderPickerWidget(
+          onChange: (value) {
+            selected = value;
+          },
+        ),
       ),
     ),
   );
@@ -21,7 +29,13 @@ Future<Duration?> showMyTimingReminderPicker() {
 
 ///
 class TimingReminderPickerWidget extends StatefulWidget {
-  const TimingReminderPickerWidget({super.key});
+  const TimingReminderPickerWidget({
+    super.key,
+    this.onChange,
+  });
+
+  ///
+  final Function(int? value)? onChange;
 
   @override
   State<TimingReminderPickerWidget> createState() =>
@@ -37,16 +51,16 @@ class _TimingReminderPickerWidgetState
   int _selectedIndex = 0;
 
   ///
-  List<_ItemEntity> _items = [
-    _ItemEntity(
-      title: '当天',
-      numberDays: 0,
-    ),
-    _ItemEntity(
-      title: '1天前',
-      numberDays: 1,
-    ),
-  ];
+  final List<int> _items = [0, 1, 2, 3, 7];
+
+  ///
+  void _changeValue() {
+    if (_isOpen) {
+       widget.onChange?.call(_items[_selectedIndex]);
+    } else {
+      widget.onChange?.call(null);
+    }
+  }
 
   ///
   Widget _buildOpen() {
@@ -60,6 +74,7 @@ class _TimingReminderPickerWidgetState
             setState(() {
               _isOpen = value;
             });
+            _changeValue();
           },
         ),
       ],
@@ -71,7 +86,7 @@ class _TimingReminderPickerWidgetState
     return ListView.builder(
       shrinkWrap: true,
       itemCount: _items.length,
-      itemBuilder: (context , index) {
+      itemBuilder: (context, index) {
         IconData icon = _selectedIndex == index
             ? Icons.check_circle
             : Icons.radio_button_unchecked_outlined;
@@ -80,6 +95,7 @@ class _TimingReminderPickerWidgetState
             setState(() {
               _selectedIndex = index;
             });
+            _changeValue();
           },
           child: SizedBox(
             height: 45.w,
@@ -87,7 +103,7 @@ class _TimingReminderPickerWidgetState
               children: [
                 Icon(icon),
                 SizedBox(width: 12),
-                Text(_items[index].title),
+                Text(RemindAdvanceUtils.getRemindAdvanceText(_items[index])),
               ],
             ),
           ),
@@ -109,14 +125,4 @@ class _TimingReminderPickerWidgetState
       ),
     );
   }
-}
-
-class _ItemEntity {
-  final String title;
-  final int numberDays;
-
-  _ItemEntity({
-    required this.title,
-    required this.numberDays,
-  });
 }

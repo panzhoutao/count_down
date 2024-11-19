@@ -1,4 +1,3 @@
-import 'package:count_down/utils/log_util.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:count_down/widgets/picker/picker.dart';
 import 'package:flutter/material.dart';
@@ -59,25 +58,29 @@ class _MyTimePickerWidgetState extends State<MyTimePickerWidget> {
   ///
   DayTimeType _type = DayTimeType.all;
 
+  var items1 = List.generate(
+    24,
+    (int index) => '$index',
+    growable: true,
+  );
+
+  var items2 = List.generate(
+    60,
+    (int index) => '$index',
+    growable: true,
+  );
+
   ///
   Widget _buildTime() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: MyPickerWidget(
-        items1: List.generate(
-          24,
-          (int index) => '$index',
-          growable: true,
-        ),
-        items2: List.generate(
-          60,
-          (int index) => '$index',
-          growable: true,
-        ),
-        onChanged: (List<String> value) {
+        items1: items1,
+        items2: items2,
+        onChangedIndex: (List<int> value) {
           widget.onDurationChanged(Duration(
-            hours: int.parse(value[0]),
-            minutes: int.parse(value[1]),
+            hours: int.parse(items1[value[0]]),
+            minutes: int.parse(items2[value[1]]),
           ));
         },
       ),

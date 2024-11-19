@@ -61,12 +61,16 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 
   /// 选择重复
   void _selectRepeat() {
-    showMyRepeatPicker();
+    showMyRepeatPicker((value) {
+      _logic.setRepeat(value);
+    });
   }
 
   /// 选择提前提醒
   void _selectTimingReminder() {
-    showMyTimingReminderPicker();
+    showRemindAdvancePicker((value) {
+      _logic.setRemindAdvance(value);
+    });
   }
 
   /// 选择标签
@@ -118,13 +122,13 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
           _listTile(
             title: '重复',
             icon: AssetsRes.SETTINGS_TAG,
-            contentText: '',
+            contentText: _logic.repeatText,
             onTap: _selectRepeat,
           ),
           _listTile(
             title: '提前提醒',
             icon: AssetsRes.SETTINGS_TAG,
-            contentText: '00:00',
+            contentText: _logic.remindAdvanceText,
             onTap: _selectTimingReminder,
           ),
           _listTile(

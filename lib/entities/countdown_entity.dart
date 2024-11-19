@@ -14,11 +14,11 @@ class DbCountdownEntity {
   /// 是否全天
   bool? isAllDay;
 
-  /// 重复
+  /// 重复类型  - CountdownRepeatType
   String? repeat;
 
-  /// 提前提醒
-  String? timing;
+  /// 提前提醒 (天数)
+  int? remindAdvance;
 
   /// 标签
   int? tagId;
@@ -33,7 +33,7 @@ class DbCountdownEntity {
     this.dateTime,
     this.isAllDay,
     this.repeat,
-    this.timing,
+    this.remindAdvance,
     this.tagId,
     this.isDone,
   });

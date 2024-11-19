@@ -1,4 +1,6 @@
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/utils/remind_advance_utils.dart';
+import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:date_format/date_format.dart';
 import 'package:get/get.dart';
 
@@ -25,11 +27,26 @@ class EditCountdownController extends GetxController {
     }
   }
 
+  ///
+  String get repeatText {
+    return CountdownRepeatType.fromName(entity!.repeat!).text;
+  }
+
+  ///
+  String get remindAdvanceText {
+    if (entity?.remindAdvance == null) {
+      return '未设置';
+    } else {
+      return RemindAdvanceUtils.getRemindAdvanceText(entity!.remindAdvance!);
+    }
+  }
+
   @override
   void onInit() {
     entity ??= DbCountdownEntity(
       dateTime: _formatDate(DateTime.now().copyWith(hour: 0, minute: 0)),
       isAllDay: true,
+      repeat: CountdownRepeatType.once.name,
     );
     super.onInit();
   }
@@ -58,6 +75,18 @@ class EditCountdownController extends GetxController {
         ),
       );
     }
+    update();
+  }
+
+  ///
+  void setRepeat(CountdownRepeatType type) {
+    entity?.repeat = type.name;
+    update();
+  }
+
+  ///
+  void setRemindAdvance(int? value) {
+    entity?.remindAdvance = value;
     update();
   }
 

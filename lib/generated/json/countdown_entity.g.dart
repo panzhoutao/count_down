@@ -15,13 +15,17 @@ DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   if (dateTime != null) {
     dbCountdownEntity.dateTime = dateTime;
   }
+  final bool? isAllDay = jsonConvert.convert<bool>(json['isAllDay']);
+  if (isAllDay != null) {
+    dbCountdownEntity.isAllDay = isAllDay;
+  }
   final String? repeat = jsonConvert.convert<String>(json['repeat']);
   if (repeat != null) {
     dbCountdownEntity.repeat = repeat;
   }
-  final String? timing = jsonConvert.convert<String>(json['timing']);
-  if (timing != null) {
-    dbCountdownEntity.timing = timing;
+  final int? remindAdvance = jsonConvert.convert<int>(json['remindAdvance']);
+  if (remindAdvance != null) {
+    dbCountdownEntity.remindAdvance = remindAdvance;
   }
   final int? tagId = jsonConvert.convert<int>(json['tagId']);
   if (tagId != null) {
@@ -39,8 +43,9 @@ Map<String, dynamic> $DbCountdownEntityToJson(DbCountdownEntity entity) {
   data['id'] = entity.id;
   data['name'] = entity.name;
   data['dateTime'] = entity.dateTime;
+  data['isAllDay'] = entity.isAllDay;
   data['repeat'] = entity.repeat;
-  data['timing'] = entity.timing;
+  data['remindAdvance'] = entity.remindAdvance;
   data['tagId'] = entity.tagId;
   data['isDone'] = entity.isDone;
   return data;
@@ -51,8 +56,9 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
     int? id,
     String? name,
     String? dateTime,
+    bool? isAllDay,
     String? repeat,
-    String? timing,
+    int? remindAdvance,
     int? tagId,
     bool? isDone,
   }) {
@@ -60,8 +66,9 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
       ..id = id ?? this.id
       ..name = name ?? this.name
       ..dateTime = dateTime ?? this.dateTime
+      ..isAllDay = isAllDay ?? this.isAllDay
       ..repeat = repeat ?? this.repeat
-      ..timing = timing ?? this.timing
+      ..remindAdvance = remindAdvance ?? this.remindAdvance
       ..tagId = tagId ?? this.tagId
       ..isDone = isDone ?? this.isDone;
   }
