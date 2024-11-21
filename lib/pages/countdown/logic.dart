@@ -1,5 +1,8 @@
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/entities/tag_entity.dart';
+import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
+import 'package:count_down/utils/toast_utils.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:date_format/date_format.dart';
 import 'package:get/get.dart';
@@ -41,11 +44,19 @@ class EditCountdownController extends GetxController {
     }
   }
 
+  ///
+  String get tagText {
+    if (entity?.tagId != null) {
+      return TagService.to.findTagById(entity!.tagId!).name!;
+    } else {
+      return '无';
+    }
+  }
+
   @override
   void onInit() {
     entity ??= DbCountdownEntity(
       dateTime: _formatDate(DateTime.now().copyWith(hour: 0, minute: 0)),
-      isAllDay: true,
       repeat: CountdownRepeatType.once.name,
     );
     super.onInit();
@@ -91,7 +102,23 @@ class EditCountdownController extends GetxController {
   }
 
   ///
-  void save() {}
+  void setTag(DbTagEntity? value) {
+    if (value == null) {
+      entity?.tagId = null;
+    } else {
+      entity?.tagId = value.id;
+    }
+    update();
+  }
+
+  ///
+  void save() {
+    if (entity?.name == null) {
+      showToast('请填写事件名称');
+      return;
+    }
+
+  }
 }
 
 ///

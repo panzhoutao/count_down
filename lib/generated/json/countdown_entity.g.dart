@@ -1,5 +1,7 @@
 import 'package:count_down/generated/json/base/json_convert_content.dart';
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/widgets/picker/repeat_picker.dart';
+
 
 DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   final DbCountdownEntity dbCountdownEntity = DbCountdownEntity();
@@ -31,9 +33,9 @@ DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   if (tagId != null) {
     dbCountdownEntity.tagId = tagId;
   }
-  final bool? isDone = jsonConvert.convert<bool>(json['isDone']);
-  if (isDone != null) {
-    dbCountdownEntity.isDone = isDone;
+  final bool? isTop = jsonConvert.convert<bool>(json['isTop']);
+  if (isTop != null) {
+    dbCountdownEntity.isTop = isTop;
   }
   return dbCountdownEntity;
 }
@@ -47,7 +49,7 @@ Map<String, dynamic> $DbCountdownEntityToJson(DbCountdownEntity entity) {
   data['repeat'] = entity.repeat;
   data['remindAdvance'] = entity.remindAdvance;
   data['tagId'] = entity.tagId;
-  data['isDone'] = entity.isDone;
+  data['isTop'] = entity.isTop;
   return data;
 }
 
@@ -60,7 +62,7 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
     String? repeat,
     int? remindAdvance,
     int? tagId,
-    bool? isDone,
+    bool? isTop,
   }) {
     return DbCountdownEntity()
       ..id = id ?? this.id
@@ -70,6 +72,6 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
       ..repeat = repeat ?? this.repeat
       ..remindAdvance = remindAdvance ?? this.remindAdvance
       ..tagId = tagId ?? this.tagId
-      ..isDone = isDone ?? this.isDone;
+      ..isTop = isTop ?? this.isTop;
   }
 }

@@ -75,7 +75,9 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 
   /// 选择标签
   void _selectTag() {
-    showMySelectTagPicker();
+    showMySelectTagPicker((value) {
+      _logic.setTag(value);
+    });
   }
 
   ///
@@ -134,7 +136,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
           _listTile(
             title: '标签',
             icon: AssetsRes.SETTINGS_TAG,
-            contentText: '',
+            contentText: _logic.tagText,
             onTap: _selectTag,
           ),
         ],

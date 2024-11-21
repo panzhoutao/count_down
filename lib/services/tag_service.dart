@@ -39,4 +39,9 @@ class TagService extends GetxService {
     updateTagList();
     return result;
   }
+
+  ///
+  DbTagEntity findTagById(int id) {
+    return tagList.firstWhere((element) => element.id == id);
+  }
 }

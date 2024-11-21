@@ -1,19 +1,31 @@
+import 'package:count_down/entities/tag_entity.dart';
 import 'package:count_down/pages/add_tag/add_tag.dart';
 import 'package:count_down/router_manage.dart';
+import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 ///
-void showMySelectTagPicker() {
+void showMySelectTagPicker([Function(DbTagEntity? tag)? onConfirm]) {
+  DbTagEntity? selectedTag;
   Get.bottomSheet(
     BottomSheetWidget(
       title: '选择标签',
-      onConfirm: () {},
+      onConfirm: () {
+        if (selectedTag != null) {
+          onConfirm?.call(selectedTag);
+        }
+        Get.backLegacy();
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.w),
-        child: SelectTagWidget(),
+        child: SelectTagWidget(
+          onChange: (tag) {
+            selectedTag = tag;
+          },
+        ),
       ),
     ),
   );
@@ -21,7 +33,10 @@ void showMySelectTagPicker() {
 
 ///
 class SelectTagWidget extends StatefulWidget {
-  const SelectTagWidget({super.key});
+  const SelectTagWidget({super.key, this.onChange});
+
+  ///
+  final Function(DbTagEntity? tag)? onChange;
 
   @override
   State<SelectTagWidget> createState() => _SelectTagWidgetState();
@@ -29,13 +44,18 @@ class SelectTagWidget extends StatefulWidget {
 
 class _SelectTagWidgetState extends State<SelectTagWidget> {
   ///
-  String _selectedTag = '';
+  DbTagEntity? _selectedTag;
 
   ///
-  List<String> _tags = [
-    '事件',
-    '生日',
-  ];
+  List<DbTagEntity> get _tags => TagService.to.tagList;
+
+  @override
+  void initState() {
+    if (_tags.isNotEmpty) {
+      _selectedTag = _tags.first;
+    }
+    super.initState();
+  }
 
   ///
   Widget _buildAdd() {
@@ -44,7 +64,14 @@ class _SelectTagWidgetState extends State<SelectTagWidget> {
         showCupertinoModalSheet(
           context: context,
           builder: (context) => AddTagPage(),
-        );
+        ).then((value) {
+          setState(() {
+            if (_tags.isNotEmpty && _selectedTag == null) {
+              _selectedTag = _tags.first;
+            }
+            widget.onChange?.call(_selectedTag);
+          });
+        });
       },
       child: _SelectTagWidget(
         icon: Icons.add,
@@ -64,9 +91,10 @@ class _SelectTagWidgetState extends State<SelectTagWidget> {
           setState(() {
             _selectedTag = e;
           });
+          widget.onChange?.call(e);
         },
         child: _SelectTagItemWidget(
-          title: e,
+          title: '${e.name}',
           selected: e == _selectedTag,
         ),
       );

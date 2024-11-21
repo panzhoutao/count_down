@@ -1,4 +1,5 @@
 import 'package:count_down/generated/json/base/json_field.dart';
+import 'package:count_down/widgets/picker/repeat_picker.dart';
 
 @JsonSerializable()
 class DbCountdownEntity {
@@ -12,7 +13,7 @@ class DbCountdownEntity {
   String? dateTime;
 
   /// 是否全天
-  bool? isAllDay;
+  bool isAllDay;
 
   /// 重复类型  - CountdownRepeatType
   String? repeat;
@@ -23,19 +24,18 @@ class DbCountdownEntity {
   /// 标签
   int? tagId;
 
-  /// 是否完成
-  bool? isDone;
+  /// 是否置顶
+  bool isTop = false;
 
   ///
   DbCountdownEntity({
     this.id,
     this.name,
     this.dateTime,
-    this.isAllDay,
+    this.isAllDay = true,
     this.repeat,
     this.remindAdvance,
     this.tagId,
-    this.isDone,
   });
 
   ///
