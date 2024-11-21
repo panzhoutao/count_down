@@ -30,6 +30,7 @@ class DbManager {
   final _databaseName = "count_down.db";
   final _databaseVersion = 1;
   final tagTable = "tag";
+  final countdownTable = "countdown";
   final columnId = 'id';
   final columnName = 'name';
 
@@ -60,7 +61,17 @@ class DbManager {
     ''');
   }
 
+  /// 创建倒计时事件表
+  Future<void> createCountdownTable(Database db) {
+    Log.i('数据表countdown 创建');
+    return db.execute('''
+        CREATE TABLE $countdownTable (
+        $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+        $columnName TEXT
+      )
+    ''');
+  }
+
   ///
   TagDao get tagDao => TagDaoImpl();
-
 }
