@@ -1,5 +1,4 @@
 import 'package:count_down/generated/json/base/json_field.dart';
-import 'package:count_down/widgets/picker/repeat_picker.dart';
 
 @JsonSerializable()
 class DbCountdownEntity {

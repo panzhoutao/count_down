@@ -33,6 +33,12 @@ class DbManager {
   final countdownTable = "countdown";
   final columnId = 'id';
   final columnName = 'name';
+  final columnDateTime = 'date_time';
+  final columnIsAllDay = 'is_all_day';
+  final columnRepeat = 'repeat';
+  final columnRemindAdvance = 'remind_advance';
+  final columnTagId = 'tag_id';
+  final columnIsTop = 'is_top';
 
   /// 打开数据库
   Future<Database> openDb() async {
@@ -67,7 +73,13 @@ class DbManager {
     return db.execute('''
         CREATE TABLE $countdownTable (
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-        $columnName TEXT
+        $columnName TEXT,
+        $columnDateTime TEXT,
+        $columnIsAllDay INTEGER,
+        $columnRepeat TEXT,
+        $columnRemindAdvance INTEGER,
+        $columnTagId INTEGER,
+        $columnIsTop INTEGER
       )
     ''');
   }
