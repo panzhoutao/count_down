@@ -1,13 +1,13 @@
+import 'package:count_down/db/db_manager.dart';
 import 'package:count_down/entities/tag_entity.dart';
 import 'package:get/get.dart';
-import '../db/db_manager.dart';
 
 ///
 class TagService extends GetxService {
   static TagService get to => Get.find();
 
   ///
-  var tagList = <DbTagEntity>[].obs;
+  var dataList = <DbTagEntity>[].obs;
 
   @override
   void onInit() {
@@ -25,7 +25,7 @@ class TagService extends GetxService {
 
   ///
   void updateTagList() async {
-    tagList.assignAll(await getTagList());
+    dataList.assignAll(await getTagList());
   }
 
   ///
@@ -41,7 +41,7 @@ class TagService extends GetxService {
   }
 
   ///
-  DbTagEntity findTagById(int id) {
-    return tagList.firstWhere((element) => element.id == id);
+  DbTagEntity findTagByKey(String key) {
+    return dataList.firstWhere((element) => element.key == key);
   }
 }

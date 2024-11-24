@@ -1,8 +1,9 @@
 import 'package:count_down/pages/countdown/edit_countdown.dart';
-import 'package:count_down/pages/countdown/item_detail.dart';
-import 'package:count_down/pages/home/item.dart';
+import 'package:count_down/pages/countdown/countdown_detail.dart';
+import 'package:count_down/pages/home/countdown/view.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/router_manage.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -60,104 +61,18 @@ class _HomePageState extends State<HomePage> {
 
   ///
   Widget _buildDate() {
+    String dateText = formatDate(DateTime.now(), [mm, '月', dd, '日']);
     return GestureDetector(
       onTap: () {
         // Get.toNamed(RoutersManager.itemDetail);
       },
       child: Text(
-        '1月1日',
+        dateText,
         style: TextStyle(
           fontSize: 40.sp,
           fontWeight: FontWeight.bold,
         ),
       ),
-    );
-  }
-
-  ///
-  Widget _buildTags() {
-    return ListView.separated(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.w),
-              topRight: Radius.circular(6.w),
-              bottomRight: Radius.circular(20.w),
-              bottomLeft: Radius.circular(6.w),
-            ),
-          ),
-          constraints: BoxConstraints(
-            minWidth: 70.w,
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            'data',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.sp,
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          width: 10.w,
-        );
-      },
-      itemCount: 10,
-    );
-  }
-
-  ///
-  Widget _buildList() {
-    return ListView.separated(
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 74.w,
-          child: Slidable(
-            endActionPane: ActionPane(
-              motion: ScrollMotion(),
-              extentRatio: 0.2,
-              children: [
-                Spacer(),
-                Container(
-                  width: 53.w,
-                  height: 53.w,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    color: Colors.white,
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                    },
-                  ),
-                ),
-              ],
-            ),
-            child: GestureDetector(
-              onTap: () {
-                showCupertinoModalSheet(
-                  context: context,
-                  builder: (context) => ItemDetailPage(),
-                );
-              },
-              child: ItemWidget(),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(height: 10.w);
-      },
-      itemCount: 10,
     );
   }
 
@@ -181,20 +96,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(left: 20.w),
+                  margin: EdgeInsets.only(left: 20.w, bottom: 30.w),
                   child: _buildDate(),
                 ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  height: 34.w,
-                  margin: EdgeInsets.only(top: 30.w),
-                  child: _buildTags(),
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(top: 20.w),
-                  child: _buildList(),
-                ).expand(),
+                HomeCountdownWidget().expand(),
               ],
             ),
           ),

@@ -11,8 +11,8 @@ class TagDaoImpl implements TagDao {
   Future<bool> delete(DbTagEntity tag) async {
     int result = await _dbManager.db.delete(
       _dbManager.tagTable,
-      where: 'id = ?',
-      whereArgs: [tag.id],
+      where: '${_dbManager.columnKey} = ?',
+      whereArgs: [tag.key],
     );
     Log.i('db deleteTask = $result');
     return result > 0;

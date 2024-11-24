@@ -1,10 +1,12 @@
 import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/entities/tag_entity.dart';
+import 'package:count_down/services/countdown_service.dart';
 import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/utils/toast_utils.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:date_format/date_format.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 ///
@@ -37,17 +39,13 @@ class EditCountdownController extends GetxController {
 
   ///
   String get remindAdvanceText {
-    if (entity?.remindAdvance == null) {
-      return '未设置';
-    } else {
-      return RemindAdvanceUtils.getRemindAdvanceText(entity!.remindAdvance!);
-    }
+    return RemindAdvanceUtils.getRemindAdvanceText(entity!.remindAdvance);
   }
 
   ///
   String get tagText {
-    if (entity?.tagId != null) {
-      return TagService.to.findTagById(entity!.tagId!).name!;
+    if (entity?.tagKey != null) {
+      return TagService.to.findTagByKey(entity!.tagKey!).name!;
     } else {
       return '无';
     }
@@ -104,9 +102,9 @@ class EditCountdownController extends GetxController {
   ///
   void setTag(DbTagEntity? value) {
     if (value == null) {
-      entity?.tagId = null;
+      entity?.tagKey = null;
     } else {
-      entity?.tagId = value.id;
+      entity?.tagKey = value.key;
     }
     update();
   }
@@ -117,7 +115,11 @@ class EditCountdownController extends GetxController {
       showToast('请填写事件名称');
       return;
     }
-
+    CountdownService.to.add(entity!).then((value) {
+      if (value) {
+        Navigator.of(Get.context!).pop();
+      }
+    });
   }
 }
 

@@ -32,7 +32,7 @@ class _SortAndTagPageState extends BaseState<SortAndTagPage> {
   ///
   Widget _buildList() {
     return Obx(() {
-      var list = TagService.to.tagList;
+      var list = TagService.to.dataList;
       return ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {

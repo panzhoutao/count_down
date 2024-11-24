@@ -7,9 +7,9 @@ import 'package:count_down/generated/json/base/json_convert_content.dart';
 
 DbTagEntity $DbTagEntityFromJson(Map<String, dynamic> json) {
   final DbTagEntity dbTagEntity = DbTagEntity();
-  final int? id = jsonConvert.convert<int>(json['id']);
-  if (id != null) {
-    dbTagEntity.id = id;
+  final String? key = jsonConvert.convert<String>(json['key']);
+  if (key != null) {
+    dbTagEntity.key = key;
   }
   final String? name = jsonConvert.convert<String>(json['name']);
   if (name != null) {
@@ -20,18 +20,18 @@ DbTagEntity $DbTagEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $DbTagEntityToJson(DbTagEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['id'] = entity.id;
+  data['key'] = entity.key;
   data['name'] = entity.name;
   return data;
 }
 
 extension DbTagEntityExtension on DbTagEntity {
   DbTagEntity copyWith({
-    int? id,
+    String? key,
     String? name,
   }) {
     return DbTagEntity()
-      ..id = id ?? this.id
+      ..key = key ?? this.key
       ..name = name ?? this.name;
   }
 }

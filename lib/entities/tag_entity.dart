@@ -6,16 +6,16 @@ import 'package:count_down/generated/json/base/json_field.dart';
 class DbTagEntity {
   DbTagEntity();
 
-  int? id;
+  String? key;
   String? name;
 
   ///
   factory DbTagEntity.fromJson(Map<String, dynamic> json) => DbTagEntity();
 
-  ///
+  /// key 暂用name , 后边做同步时候要用一个唯一标识
   Map<String, Object?> toSqlRaw() {
     return {
-      DbManager().columnId: id,
+      DbManager().columnKey: key ?? name,
       DbManager().columnName: name,
     };
   }
@@ -23,11 +23,13 @@ class DbTagEntity {
   ///
   factory DbTagEntity.fromSqlRaw(Map<String, dynamic> json) {
     final dbTagEntity = DbTagEntity();
-    final int? id = jsonConvert.convert<int>(json['id']);
-    if (id != null) {
-      dbTagEntity.id = id;
+    final String? key =
+        jsonConvert.convert<String>(json[DbManager().columnKey]);
+    if (key != null) {
+      dbTagEntity.key = key;
     }
-    final String? name = jsonConvert.convert<String>(json['name']);
+    final String? name =
+        jsonConvert.convert<String>(json[DbManager().columnName]);
     if (name != null) {
       dbTagEntity.name = name;
     }

@@ -1,13 +1,15 @@
 import 'package:count_down/generated/json/base/json_convert_content.dart';
 import 'package:count_down/entities/countdown_entity.dart';
-import 'package:count_down/widgets/picker/repeat_picker.dart';
+import 'package:count_down/db/db_manager.dart';
+
+import 'package:count_down/generated/json/base/json_convert_content.dart';
 
 
 DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   final DbCountdownEntity dbCountdownEntity = DbCountdownEntity();
-  final int? id = jsonConvert.convert<int>(json['id']);
-  if (id != null) {
-    dbCountdownEntity.id = id;
+  final String? key = jsonConvert.convert<String>(json['key']);
+  if (key != null) {
+    dbCountdownEntity.key = key;
   }
   final String? name = jsonConvert.convert<String>(json['name']);
   if (name != null) {
@@ -29,9 +31,9 @@ DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   if (remindAdvance != null) {
     dbCountdownEntity.remindAdvance = remindAdvance;
   }
-  final int? tagId = jsonConvert.convert<int>(json['tagId']);
-  if (tagId != null) {
-    dbCountdownEntity.tagId = tagId;
+  final String? tagKey = jsonConvert.convert<String>(json['tagKey']);
+  if (tagKey != null) {
+    dbCountdownEntity.tagKey = tagKey;
   }
   final bool? isTop = jsonConvert.convert<bool>(json['isTop']);
   if (isTop != null) {
@@ -42,36 +44,36 @@ DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $DbCountdownEntityToJson(DbCountdownEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['id'] = entity.id;
+  data['key'] = entity.key;
   data['name'] = entity.name;
   data['dateTime'] = entity.dateTime;
   data['isAllDay'] = entity.isAllDay;
   data['repeat'] = entity.repeat;
   data['remindAdvance'] = entity.remindAdvance;
-  data['tagId'] = entity.tagId;
+  data['tagKey'] = entity.tagKey;
   data['isTop'] = entity.isTop;
   return data;
 }
 
 extension DbCountdownEntityExtension on DbCountdownEntity {
   DbCountdownEntity copyWith({
-    int? id,
+    String? key,
     String? name,
     String? dateTime,
     bool? isAllDay,
     String? repeat,
     int? remindAdvance,
-    int? tagId,
+    String? tagKey,
     bool? isTop,
   }) {
     return DbCountdownEntity()
-      ..id = id ?? this.id
+      ..key = key ?? this.key
       ..name = name ?? this.name
       ..dateTime = dateTime ?? this.dateTime
       ..isAllDay = isAllDay ?? this.isAllDay
       ..repeat = repeat ?? this.repeat
       ..remindAdvance = remindAdvance ?? this.remindAdvance
-      ..tagId = tagId ?? this.tagId
+      ..tagKey = tagKey ?? this.tagKey
       ..isTop = isTop ?? this.isTop;
   }
 }

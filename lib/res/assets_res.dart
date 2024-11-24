@@ -8,5 +8,8 @@ class AssetsRes {
 
   static const String PLUGIN_NAME = 'count_down';
   static const String PLUGIN_VERSION = '1.0.0+1';
+  static const String EMPTY_DATA = 'assets/images/empty_data.svg';
+  static const String ITEM_DELETE = 'assets/images/item_delete.svg';
+  static const String ITEM_TOP = 'assets/images/item_top.svg';
   static const String SETTINGS_TAG = 'assets/images/settings_tag.svg';
 }

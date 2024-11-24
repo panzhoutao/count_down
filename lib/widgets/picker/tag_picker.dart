@@ -10,6 +10,9 @@ import 'package:get/get.dart';
 ///
 void showMySelectTagPicker([Function(DbTagEntity? tag)? onConfirm]) {
   DbTagEntity? selectedTag;
+  if (TagService.to.dataList.isNotEmpty) {
+    selectedTag = TagService.to.dataList.first;
+  }
   Get.bottomSheet(
     BottomSheetWidget(
       title: '选择标签',
@@ -47,7 +50,7 @@ class _SelectTagWidgetState extends State<SelectTagWidget> {
   DbTagEntity? _selectedTag;
 
   ///
-  List<DbTagEntity> get _tags => TagService.to.tagList;
+  List<DbTagEntity> get _tags => TagService.to.dataList;
 
   @override
   void initState() {

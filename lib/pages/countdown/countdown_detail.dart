@@ -1,22 +1,27 @@
-import 'package:count_down/main.dart';
-import 'package:count_down/pages/home/home.dart';
+import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/style/theme_data.dart';
+import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
+import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:count_down/widgets/scaffold.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
 
 ///
-class ItemDetailPage extends StatefulWidget {
-  const ItemDetailPage({super.key});
+class CountdownDetailPage extends StatefulWidget {
+  const CountdownDetailPage({super.key, required this.data});
+
+  final DbCountdownEntity data;
 
   @override
-  State<ItemDetailPage> createState() => _ItemDetailPageState();
+  State<CountdownDetailPage> createState() => _CountdownDetailPageState();
 }
 
-class _ItemDetailPageState extends BaseState<ItemDetailPage> {
+class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   ///
   Widget _buildImage() {
     return Container();
@@ -38,25 +43,81 @@ class _ItemDetailPageState extends BaseState<ItemDetailPage> {
 
   ///
   Widget _buildContent() {
-    return Text('距离 XXX 还有');
+    return RichText(
+      text: TextSpan(
+        style: TextStyle(
+          color: Color(0xFFAAAAAB),
+          fontSize: 20.sp,
+        ),
+        children: [
+          if (widget.data.tipText != null)
+            TextSpan(
+              text: '距离 ',
+            ),
+          TextSpan(
+            text: widget.data.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          if (widget.data.tipText != null)
+            TextSpan(
+              text: ' ${widget.data.tipText}',
+            ),
+        ],
+      ),
+    );
   }
 
   ///
   Widget _buildCountDays() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20.w),
-      child: Text('1天'),
+      child: Text(widget.data.differenceDays == 0
+          ? '今天'
+          : '${widget.data.differenceDays}天'),
     );
   }
 
   ///
   Widget _buildDate() {
-    return _container();
+    return _container(
+      title: '目标日期',
+      value: formatDate(
+        widget.data.targetDateTime,
+        [yyyy, '年', dd, '月', dd, '日'],
+      ),
+    );
   }
 
   ///
   Widget _buildRepeat() {
-    return _container();
+    String repeatText = CountdownRepeatType.fromName(widget.data.repeat!).text;
+    return _container(
+      title: '重复',
+      value: repeatText,
+    );
+  }
+
+  ///
+  Widget _buildTip() {
+    return _container(
+      title: '提醒',
+      value: RemindAdvanceUtils.getRemindAdvanceText(widget.data.remindAdvance),
+    );
+  }
+
+  ///
+  Widget _buildTag() {
+    String tagText = '无';
+    if (widget.data.tagKey != null) {
+       TagService.to.findTagByKey(widget.data.tagKey!).name!;
+    }
+    return _container(
+      title: '标签',
+      value: tagText,
+    );
   }
 
   @override
@@ -105,6 +166,14 @@ class _ItemDetailPageState extends BaseState<ItemDetailPage> {
                 _buildRepeat().expand(),
               ],
             ).padding(MyThemeData.instance.primaryPadding),
+            SizedBox(height: 10.w),
+            Row(
+              children: [
+                _buildTip().expand(),
+                SizedBox(width: 23.w),
+                _buildTag().expand(),
+              ],
+            ).padding(MyThemeData.instance.primaryPadding),
             Spacer(),
             _buildShare(),
           ],
@@ -115,7 +184,10 @@ class _ItemDetailPageState extends BaseState<ItemDetailPage> {
 }
 
 ///
-Widget _container() {
+Widget _container({
+  required String title,
+  required String value,
+}) {
   return Container(
     height: 76.w,
     decoration: BoxDecoration(
@@ -142,7 +214,7 @@ Widget _container() {
             ),
           ),
           child: Text(
-            '目标日期',
+            title,
             style: TextStyle(
               color: Colors.white,
             ),
@@ -151,7 +223,7 @@ Widget _container() {
         Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(left: 12.w),
-          child: Text('2023-01-01'),
+          child: Text(value),
         ).expand(),
       ],
     ),

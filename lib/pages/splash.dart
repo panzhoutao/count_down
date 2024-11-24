@@ -1,4 +1,5 @@
 import 'package:count_down/pages/home/home.dart';
+import 'package:count_down/services/countdown_service.dart';
 import 'package:count_down/widgets/cupertino_modal_sheet_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Get.put(TagService());
+    Get.put(CountdownService());
+
     Future.delayed(
       const Duration(milliseconds: 500),
       () {

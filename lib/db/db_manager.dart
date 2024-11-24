@@ -1,3 +1,5 @@
+import 'package:count_down/db/count_down/count_down_dao.dart';
+import 'package:count_down/db/count_down/countdown_dao_impl.dart';
 import 'package:count_down/db/tag/tag_dao.dart';
 import 'package:count_down/db/tag/tag_dao_impl.dart';
 import 'package:count_down/utils/log_util.dart';
@@ -27,17 +29,17 @@ class DbManager {
     Log.i('初始化数据库');
   }
 
-  final _databaseName = "count_down.db";
   final _databaseVersion = 1;
+  final _databaseName = "count_down.db";
   final tagTable = "tag";
   final countdownTable = "countdown";
-  final columnId = 'id';
+  final columnKey = 'key';
   final columnName = 'name';
   final columnDateTime = 'date_time';
   final columnIsAllDay = 'is_all_day';
   final columnRepeat = 'repeat';
   final columnRemindAdvance = 'remind_advance';
-  final columnTagId = 'tag_id';
+  final columnTagKey = 'tag_key';
   final columnIsTop = 'is_top';
 
   /// 打开数据库
@@ -45,7 +47,9 @@ class DbManager {
     db = await openDatabase(
       join(await getDatabasesPath(), _databaseName),
       onCreate: (db, version) {
+        Log.i('aaaaaaaaa');
         createTagTable(db);
+        createCountdownTable(db);
       },
       onUpgrade: (db, oldVersion, newVersion) {
         Log.i('数据库升级：$oldVersion -> $newVersion');
@@ -61,7 +65,7 @@ class DbManager {
     Log.i('数据表$tagTable 创建');
     return db.execute('''
       CREATE TABLE $tagTable (
-        $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+        $columnKey TEXT PRIMARY KEY,
         $columnName TEXT
       )
     ''');
@@ -69,16 +73,16 @@ class DbManager {
 
   /// 创建倒计时事件表
   Future<void> createCountdownTable(Database db) {
-    Log.i('数据表countdown 创建');
+    Log.i('数据表$countdownTable创建');
     return db.execute('''
         CREATE TABLE $countdownTable (
-        $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+        $columnKey TEXT PRIMARY KEY,
         $columnName TEXT,
         $columnDateTime TEXT,
         $columnIsAllDay INTEGER,
         $columnRepeat TEXT,
-        $columnRemindAdvance INTEGER,
-        $columnTagId INTEGER,
+        $columnRemindAdvance INTEGER NULL, 
+        $columnTagKey TEXT NULL,
         $columnIsTop INTEGER
       )
     ''');
@@ -86,4 +90,7 @@ class DbManager {
 
   ///
   TagDao get tagDao => TagDaoImpl();
+
+  ///
+  CountdownDao get countdownDao => CountdownDaoImpl();
 }
