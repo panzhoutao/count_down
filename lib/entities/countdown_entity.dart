@@ -109,14 +109,20 @@ class DbCountdownEntity {
   /// 目标日期
   DateTime get targetDateTime {
     var date = DateTime.parse(dateTime!);
+    var currentData = DateTime.now().copyWith(hour: 0, minute: 0);
     switch (CountdownRepeatType.fromName(repeat!)) {
       case CountdownRepeatType.weekly:
         var differDay = date.weekday - DateTime.now().weekday;
-        date = DateTime.now().add(Duration(days: differDay));
+        date = currentData.add(Duration(days: differDay));
       case CountdownRepeatType.monthly:
-      // TODO: Handle this case.
+        date = date.copyWith(
+          year: currentData.year,
+          month: currentData.month,
+        );
       case CountdownRepeatType.yearly:
-      // TODO: Handle this case.
+        date = date.copyWith(
+          year: currentData.year,
+        );
       default:
     }
     return date;
