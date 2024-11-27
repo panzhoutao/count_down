@@ -1,6 +1,6 @@
 import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/entities/tag_entity.dart';
-import 'package:count_down/pages/countdown/countdown_detail.dart';
+import 'package:count_down/pages/countdown_detail/countdown_detail.dart';
 import 'package:count_down/pages/home/countdown/logic.dart';
 import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/router_manage.dart';

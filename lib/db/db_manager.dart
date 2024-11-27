@@ -32,7 +32,7 @@ class DbManager {
   final _databaseVersion = 1;
   final _databaseName = "count_down.db";
   final tagTable = "tag";
-  final countdownTable = "countdown";
+  final countdownTable = "countdown_detail";
   final columnKey = 'key';
   final columnName = 'name';
   final columnDateTime = 'date_time';
@@ -47,7 +47,6 @@ class DbManager {
     db = await openDatabase(
       join(await getDatabasesPath(), _databaseName),
       onCreate: (db, version) {
-        Log.i('aaaaaaaaa');
         createTagTable(db);
         createCountdownTable(db);
       },

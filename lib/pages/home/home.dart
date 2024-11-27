@@ -1,5 +1,4 @@
-import 'package:count_down/pages/countdown/edit_countdown.dart';
-import 'package:count_down/pages/countdown/countdown_detail.dart';
+import 'package:count_down/pages/edit_countdown/edit_countdown.dart';
 import 'package:count_down/pages/home/countdown/view.dart';
 import 'package:count_down/pages/settings/settings.dart';
 import 'package:count_down/router_manage.dart';

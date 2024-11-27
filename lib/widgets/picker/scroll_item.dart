@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 class ScrollItem extends StatelessWidget {
   /// Item of a [ScrollWheelDatePicker] type.
   ///
-  /// [label] Label of the [ScrollWheelDatePicker] countdown.
+  /// [label] Label of the [ScrollWheelDatePicker] countdown_detail.
   ///
-  /// [textStyle] Text style of the [ScrollWheelDatePicker] countdown.
+  /// [textStyle] Text style of the [ScrollWheelDatePicker] countdown_detail.
   const ScrollItem({
     super.key,
     required this.label,
     this.textStyle,
   });
 
-  /// Label of the [ScrollWheelDatePicker] countdown.
+  /// Label of the [ScrollWheelDatePicker] countdown_detail.
   final String label;
 
-  /// Text style of the [ScrollWheelDatePicker] countdown.
+  /// Text style of the [ScrollWheelDatePicker] countdown_detail.
   final TextStyle? textStyle;
 
   @override

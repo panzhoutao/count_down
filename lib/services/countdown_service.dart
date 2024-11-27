@@ -32,6 +32,12 @@ class CountdownService extends GetxService {
     return result;
   }
 
+  Future<bool> update(DbCountdownEntity value) async {
+    bool result = await DbManager.instance.countdownDao.update(value);
+    updateList();
+    return result;
+  }
+
   ///
   Future<bool> delete(DbCountdownEntity tag) async {
     bool result = await DbManager.instance.countdownDao.delete(tag);

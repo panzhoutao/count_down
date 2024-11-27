@@ -33,9 +33,6 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
   ///
   late EditCountdownController _logic;
 
-  ///
-  var nameController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -83,7 +80,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
   ///
   Widget _buildName() {
     return TextField(
-      controller: nameController,
+      controller: _logic.nameController,
       onChanged: (value) {
         _logic.setName(value);
       },
@@ -144,19 +141,30 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
     );
   }
 
+  ///
+  Widget _actionWidget() {
+    if(widget.entity?.key == null) {
+      return ElevatedButton(
+        onPressed: () {
+          _logic.save();
+        },
+        child: Text('添加'),
+      );
+    } else {
+      return ElevatedButton(
+        onPressed: () {
+          _logic.save();
+        },
+        child: Text('保存'),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
       appBar: MyAppBar(
-        rightWidget: GestureDetector(
-          onTap: () {},
-          child: ElevatedButton(
-            onPressed: () {
-              _logic.save();
-            },
-            child: Text('添加'),
-          ),
-        ),
+        rightWidget: _actionWidget(),
       ),
       body: () {
         return GetBuilder<EditCountdownController>(

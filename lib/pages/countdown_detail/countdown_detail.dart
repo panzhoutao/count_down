@@ -1,4 +1,8 @@
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/pages/countdown_detail/logic.dart';
+import 'package:count_down/pages/edit_countdown/edit_countdown.dart';
+import 'package:count_down/router_manage.dart';
+import 'package:count_down/services/countdown_service.dart';
 import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
@@ -10,10 +14,14 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
+import 'package:get/get.dart';
 
 ///
 class CountdownDetailPage extends StatefulWidget {
-  const CountdownDetailPage({super.key, required this.data});
+  const CountdownDetailPage({
+    super.key,
+    required this.data,
+  });
 
   final DbCountdownEntity data;
 
@@ -22,6 +30,16 @@ class CountdownDetailPage extends StatefulWidget {
 }
 
 class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
+
+  ///
+  late CountdownDetailLogic _logic;
+
+  @override
+  void initState() {
+    _logic = Get.put(CountdownDetailLogic(widget.data));
+    super.initState();
+  }
+
   ///
   Widget _buildImage() {
     return Container();
@@ -86,7 +104,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
       title: '目标日期',
       value: formatDate(
         widget.data.targetDateTime,
-        [yyyy, '年', dd, '月', dd, '日'],
+        [yyyy, '年', mm, '月', dd, '日'],
       ),
     );
   }
@@ -112,11 +130,76 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildTag() {
     String tagText = '无';
     if (widget.data.tagKey != null) {
-       TagService.to.findTagByKey(widget.data.tagKey!).name!;
+      TagService.to.findTagByKey(widget.data.tagKey!).name!;
     }
     return _container(
       title: '标签',
       value: tagText,
+    );
+  }
+
+  ///
+  void _edit() {
+    showCupertinoModalSheet(
+      context: context,
+      builder: (context) => EditCountdownPage(entity: widget.data),
+    );
+  }
+
+  ///
+  void _delete() {
+    CountdownService.to.delete(widget.data).then((value) {
+      if (value) {
+        Navigator.of(Get.context!).pop();
+      }
+    });
+  }
+
+  ///
+  Widget _buildMenu() {
+    return PopupMenuButton<String>(
+      icon: Icon(Icons.more_horiz),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.w),
+      ),
+      offset: Offset(-10, 0),
+      position: PopupMenuPosition.under,
+      onSelected: (value) {
+        switch (value) {
+          case '置顶':
+            _logic.setTop();
+            break;
+          case '编辑':
+            _edit();
+            break;
+          case '完成':
+            _logic.complete();
+            break;
+          case '删除':
+            _delete();
+            break;
+        }
+      },
+      itemBuilder: (context) {
+        return <PopupMenuEntry<String>>[
+          PopupMenuItem<String>(
+            value: '置顶',
+            child: Text('置顶'),
+          ),
+          PopupMenuItem<String>(
+            value: '编辑',
+            child: Text('编辑'),
+          ),
+          PopupMenuItem<String>(
+            value: '完成',
+            child: Text('完成'),
+          ),
+          PopupMenuItem<String>(
+            value: '删除',
+            child: Text('删除'),
+          ),
+        ];
+      },
     );
   }
 
@@ -126,32 +209,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
       padding: EdgeInsets.zero,
       appBar: MyAppBar(
         leftWidget: Container(),
-        rightWidget: GestureDetector(
-          onTap: () {},
-          child: PopupMenuButton<String>(
-            icon: Icon(Icons.more_horiz),
-            itemBuilder: (context) {
-              return <PopupMenuEntry<String>>[
-                PopupMenuItem<String>(
-                  value: '置顶',
-                  child: Text('置顶'),
-                ),
-                PopupMenuItem<String>(
-                  value: '编辑',
-                  child: Text('编辑'),
-                ),
-                PopupMenuItem<String>(
-                  value: '完成',
-                  child: Text('完成'),
-                ),
-                PopupMenuItem<String>(
-                  value: '删除',
-                  child: Text('删除'),
-                ),
-              ];
-            },
-          ),
-        ),
+        rightWidget: _buildMenu(),
       ),
       body: () {
         return Column(

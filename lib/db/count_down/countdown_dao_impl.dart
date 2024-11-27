@@ -30,6 +30,18 @@ class CountdownDaoImpl implements CountdownDao {
   }
 
   @override
+  Future<bool> update(DbCountdownEntity entity) async {
+    int result = await _dbManager.db.update(
+      _dbManager.countdownTable,
+      entity.toSqlRaw(),
+      where: '${_dbManager.columnKey} = ?',
+      whereArgs: [entity.key],
+    );
+    Log.i('db updateTask = $result');
+    return result > 0;
+  }
+
+  @override
   Future<List<DbCountdownEntity>> queryAll() async {
     List<Map<String, dynamic>> list =
         await _dbManager.db.query(_dbManager.countdownTable);

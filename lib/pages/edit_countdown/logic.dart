@@ -18,6 +18,9 @@ class EditCountdownController extends GetxController {
   DbCountdownEntity? entity;
 
   ///
+  var nameController = TextEditingController();
+
+  ///
   DateTime get _dateTime => DateTime.parse(entity!.dateTime!);
 
   ///
@@ -57,6 +60,7 @@ class EditCountdownController extends GetxController {
       dateTime: _formatDate(DateTime.now().copyWith(hour: 0, minute: 0)),
       repeat: CountdownRepeatType.once.name,
     );
+    nameController.text = entity?.name ?? '';
     super.onInit();
   }
 
@@ -115,12 +119,22 @@ class EditCountdownController extends GetxController {
       showToast('请填写事件名称');
       return;
     }
-    CountdownService.to.add(entity!).then((value) {
-      if (value) {
-        Navigator.of(Get.context!).pop();
-      }
-    });
+
+    if (entity?.key == null) {
+      CountdownService.to.add(entity!).then((value) {
+        if (value) {
+          Navigator.of(Get.context!).pop();
+        }
+      });
+    } else {
+      CountdownService.to.update(entity!).then((value) {
+        if (value) {
+          Navigator.of(Get.context!).pop();
+        }
+      });
+    }
   }
+
 }
 
 ///
