@@ -11,12 +11,6 @@ class CountdownDetailLogic extends GetxController {
   late DbCountdownEntity data;
 
   ///
-  void delete() {
-
-  }
-
-
-  ///
   void complete() {
 
   }
