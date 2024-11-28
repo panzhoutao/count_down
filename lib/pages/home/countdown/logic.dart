@@ -68,9 +68,10 @@ class HomeCountdownLogic extends GetxController {
     update();
   }
 
-  /// TODO : 置顶
+  /// 置顶
   void top(DbCountdownEntity item) {
-
+    item.topDateTime = DateTime.now().toString();
+    countdownService.update(item);
   }
 
   /// 删除

@@ -40,7 +40,8 @@ class DbManager {
   final columnRepeat = 'repeat';
   final columnRemindAdvance = 'remind_advance';
   final columnTagKey = 'tag_key';
-  final columnIsTop = 'is_top';
+  final columnIsDone = 'is_done';
+  final columnTopDateTime = 'top_date_time';
 
   /// 打开数据库
   Future<Database> openDb() async {
@@ -82,7 +83,8 @@ class DbManager {
         $columnRepeat TEXT,
         $columnRemindAdvance INTEGER NULL, 
         $columnTagKey TEXT NULL,
-        $columnIsTop INTEGER
+        $columnIsDone INTEGER,
+        $columnTopDateTime TEXT
       )
     ''');
   }

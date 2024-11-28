@@ -24,12 +24,14 @@ class CountdownDetailLogic extends GetxController {
 
   ///
   void complete() {
-
+    data.isDone = true;
+    CountdownService.to.update(data);
   }
 
   ///
   void setTop() {
-
+    data.topDateTime = DateTime.now().toString();
+    CountdownService.to.update(data);
   }
 
 }

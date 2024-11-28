@@ -28,9 +28,11 @@ class DbCountdownEntity {
   /// 标签
   String? tagKey;
 
-  /// 是否置顶
-  /// TODO : 应该直接排一下数据表就好了
-  bool isTop = false;
+  /// 是否完成
+  bool isDone;
+
+  /// 置顶时间
+  String? topDateTime;
 
   ///
   DbCountdownEntity({
@@ -41,6 +43,7 @@ class DbCountdownEntity {
     this.repeat,
     this.remindAdvance,
     this.tagKey,
+    this.isDone = false,
   });
 
   factory DbCountdownEntity.fromJson(Map<String, dynamic> json) =>
@@ -58,7 +61,8 @@ class DbCountdownEntity {
       DbManager().columnRepeat: repeat,
       DbManager().columnRemindAdvance: remindAdvance,
       DbManager().columnTagKey: tagKey,
-      DbManager().columnIsTop: isTop ? 1 : 0,
+      DbManager().columnIsDone: isDone ? 1 : 0,
+      DbManager().columnTopDateTime: topDateTime,
     };
   }
 
@@ -100,9 +104,15 @@ class DbCountdownEntity {
     if (tagKey != null) {
       dbTagEntity.tagKey = tagKey;
     }
-    final int? isTop = jsonConvert.convert<int>(json[DbManager().columnIsTop]);
-    if (isTop != null) {
-      dbTagEntity.isTop = isTop == 1;
+    final int? isDone =
+        jsonConvert.convert<int>(json[DbManager().columnIsDone]);
+    if (isDone != null) {
+      dbTagEntity.isDone = isDone == 1;
+    }
+    final String? topDateTime =
+        jsonConvert.convert<String>(json[DbManager().columnTopDateTime]);
+    if (topDateTime != null) {
+      dbTagEntity.topDateTime = topDateTime;
     }
     return dbTagEntity;
   }

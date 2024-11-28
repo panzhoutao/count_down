@@ -4,6 +4,8 @@ import 'package:count_down/db/db_manager.dart';
 
 import 'package:count_down/generated/json/base/json_convert_content.dart';
 
+import 'package:count_down/widgets/picker/repeat_picker.dart';
+
 
 DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   final DbCountdownEntity dbCountdownEntity = DbCountdownEntity();
@@ -35,9 +37,13 @@ DbCountdownEntity $DbCountdownEntityFromJson(Map<String, dynamic> json) {
   if (tagKey != null) {
     dbCountdownEntity.tagKey = tagKey;
   }
-  final bool? isTop = jsonConvert.convert<bool>(json['isTop']);
-  if (isTop != null) {
-    dbCountdownEntity.isTop = isTop;
+  final bool? isDone = jsonConvert.convert<bool>(json['isDone']);
+  if (isDone != null) {
+    dbCountdownEntity.isDone = isDone;
+  }
+  final String? topDateTime = jsonConvert.convert<String>(json['topDateTime']);
+  if (topDateTime != null) {
+    dbCountdownEntity.topDateTime = topDateTime;
   }
   return dbCountdownEntity;
 }
@@ -51,7 +57,8 @@ Map<String, dynamic> $DbCountdownEntityToJson(DbCountdownEntity entity) {
   data['repeat'] = entity.repeat;
   data['remindAdvance'] = entity.remindAdvance;
   data['tagKey'] = entity.tagKey;
-  data['isTop'] = entity.isTop;
+  data['isDone'] = entity.isDone;
+  data['topDateTime'] = entity.topDateTime;
   return data;
 }
 
@@ -64,7 +71,8 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
     String? repeat,
     int? remindAdvance,
     String? tagKey,
-    bool? isTop,
+    bool? isDone,
+    String? topDateTime,
   }) {
     return DbCountdownEntity()
       ..key = key ?? this.key
@@ -74,6 +82,7 @@ extension DbCountdownEntityExtension on DbCountdownEntity {
       ..repeat = repeat ?? this.repeat
       ..remindAdvance = remindAdvance ?? this.remindAdvance
       ..tagKey = tagKey ?? this.tagKey
-      ..isTop = isTop ?? this.isTop;
+      ..isDone = isDone ?? this.isDone
+      ..topDateTime = topDateTime ?? this.topDateTime;
   }
 }
