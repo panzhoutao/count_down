@@ -69,7 +69,9 @@ class HomeCountdownLogic extends GetxController {
   }
 
   /// TODO : 置顶
-  void top(DbCountdownEntity item) {}
+  void top(DbCountdownEntity item) {
+
+  }
 
   /// 删除
   void delete(DbCountdownEntity item) {

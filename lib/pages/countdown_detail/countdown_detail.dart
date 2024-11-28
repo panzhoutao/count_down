@@ -20,23 +20,23 @@ import 'package:get/get.dart';
 class CountdownDetailPage extends StatefulWidget {
   const CountdownDetailPage({
     super.key,
-    required this.data,
+    required this.keyId,
   });
 
-  final DbCountdownEntity data;
+  ///
+  final String keyId;
 
   @override
   State<CountdownDetailPage> createState() => _CountdownDetailPageState();
 }
 
 class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
-
   ///
   late CountdownDetailLogic _logic;
 
   @override
   void initState() {
-    _logic = Get.put(CountdownDetailLogic(widget.data));
+    _logic = Get.put(CountdownDetailLogic(widget.keyId));
     super.initState();
   }
 
@@ -68,20 +68,20 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
           fontSize: 20.sp,
         ),
         children: [
-          if (widget.data.tipText != null)
+          if (_logic.data.tipText != null)
             TextSpan(
               text: '距离 ',
             ),
           TextSpan(
-            text: widget.data.name,
+            text: _logic.data.name,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          if (widget.data.tipText != null)
+          if (_logic.data.tipText != null)
             TextSpan(
-              text: ' ${widget.data.tipText}',
+              text: ' ${_logic.data.tipText}',
             ),
         ],
       ),
@@ -92,9 +92,9 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildCountDays() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20.w),
-      child: Text(widget.data.differenceDays == 0
+      child: Text(_logic.data.differenceDays == 0
           ? '今天'
-          : '${widget.data.differenceDays}天'),
+          : '${_logic.data.differenceDays}天'),
     );
   }
 
@@ -103,7 +103,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
     return _container(
       title: '目标日期',
       value: formatDate(
-        widget.data.targetDateTime,
+        _logic.data.targetDateTime,
         [yyyy, '年', mm, '月', dd, '日'],
       ),
     );
@@ -111,7 +111,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
 
   ///
   Widget _buildRepeat() {
-    String repeatText = CountdownRepeatType.fromName(widget.data.repeat!).text;
+    String repeatText = CountdownRepeatType.fromName(_logic.data.repeat!).text;
     return _container(
       title: '重复',
       value: repeatText,
@@ -122,15 +122,15 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildTip() {
     return _container(
       title: '提醒',
-      value: RemindAdvanceUtils.getRemindAdvanceText(widget.data.remindAdvance),
+      value: RemindAdvanceUtils.getRemindAdvanceText(_logic.data.remindAdvance),
     );
   }
 
   ///
   Widget _buildTag() {
     String tagText = '无';
-    if (widget.data.tagKey != null) {
-      TagService.to.findTagByKey(widget.data.tagKey!).name!;
+    if (_logic.data.tagKey != null) {
+      TagService.to.findTagByKey(_logic.data.tagKey!).name!;
     }
     return _container(
       title: '标签',
@@ -142,13 +142,15 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   void _edit() {
     showCupertinoModalSheet(
       context: context,
-      builder: (context) => EditCountdownPage(entity: widget.data),
-    );
+      builder: (context) => EditCountdownPage(entity: _logic.data),
+    ).then((value) {
+      _logic.updateData();
+    });
   }
 
   ///
   void _delete() {
-    CountdownService.to.delete(widget.data).then((value) {
+    CountdownService.to.delete(_logic.data).then((value) {
       if (value) {
         Navigator.of(Get.context!).pop();
       }
@@ -212,29 +214,33 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
         rightWidget: _buildMenu(),
       ),
       body: () {
-        return Column(
-          children: [
-            _buildImage(),
-            _buildContent(),
-            _buildCountDays(),
-            Row(
+        return GetBuilder<CountdownDetailLogic>(
+          builder: (controller) {
+            return Column(
               children: [
-                _buildDate().expand(),
-                SizedBox(width: 23.w),
-                _buildRepeat().expand(),
+                _buildImage(),
+                _buildContent(),
+                _buildCountDays(),
+                Row(
+                  children: [
+                    _buildDate().expand(),
+                    SizedBox(width: 23.w),
+                    _buildRepeat().expand(),
+                  ],
+                ).padding(MyThemeData.instance.primaryPadding),
+                SizedBox(height: 10.w),
+                Row(
+                  children: [
+                    _buildTip().expand(),
+                    SizedBox(width: 23.w),
+                    _buildTag().expand(),
+                  ],
+                ).padding(MyThemeData.instance.primaryPadding),
+                Spacer(),
+                _buildShare(),
               ],
-            ).padding(MyThemeData.instance.primaryPadding),
-            SizedBox(height: 10.w),
-            Row(
-              children: [
-                _buildTip().expand(),
-                SizedBox(width: 23.w),
-                _buildTag().expand(),
-              ],
-            ).padding(MyThemeData.instance.primaryPadding),
-            Spacer(),
-            _buildShare(),
-          ],
+            );
+          },
         );
       },
     );

@@ -46,7 +46,7 @@ class CountdownService extends GetxService {
   }
 
   ///
-  DbCountdownEntity findTagByKey(String key) {
+  DbCountdownEntity findByKey(String key) {
     return dataList.firstWhere((element) => element.key == key);
   }
 

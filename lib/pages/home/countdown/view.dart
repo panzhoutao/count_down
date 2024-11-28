@@ -133,7 +133,7 @@ class _HomeCountdownWidgetState extends State<HomeCountdownWidget> {
               onTap: () {
                 showCupertinoModalSheet(
                   context: context,
-                  builder: (context) => CountdownDetailPage(data: item),
+                  builder: (context) => CountdownDetailPage(keyId: item.key!),
                 );
               },
               child: _ItemWidget(data: item),
