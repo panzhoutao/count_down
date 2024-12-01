@@ -8,6 +8,7 @@ import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
+import 'package:count_down/widgets/countdown_icon.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:count_down/widgets/scaffold.dart';
 import 'package:date_format/date_format.dart';
@@ -40,7 +41,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
       width: 92.w,
       height: 92.w,
       margin: EdgeInsets.only(top: 40.w),
-      child: Placeholder(),
+      child: CountdownIcon(),
     );
   }
 

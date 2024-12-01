@@ -45,6 +45,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/countdown_icon/countdown_icon_1.svg
+    - assets/countdown_icon/countdown_icon_2.svg
+    - assets/countdown_icon/countdown_icon_3.svg
+    - assets/countdown_icon/countdown_icon_4.svg
+    - assets/countdown_icon/countdown_icon_5.svg
     - assets/images/empty_data.svg
     - assets/images/item_delete.svg
     - assets/images/item_top.svg

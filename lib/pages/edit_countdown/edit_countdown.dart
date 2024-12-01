@@ -3,6 +3,7 @@ import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
+import 'package:count_down/widgets/countdown_icon.dart';
 import 'package:count_down/widgets/picker/date_picker.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
 import 'package:count_down/widgets/picker/tag_picker.dart';
@@ -179,6 +180,15 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
     }
   }
 
+  ///
+  Widget _buildIcon() {
+    return Container(
+      height: 100.w,
+      width: 100.w,
+      child: CountdownIcon(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
@@ -192,6 +202,8 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
             _logic = controller;
             return Column(
               children: [
+                SizedBox(height: 30.w),
+                _buildIcon(),
                 _buildName().paddingSymmetric(vertical: 25.w, horizontal: 30.w),
                 _buildContainer1(),
                 _buildContainer2(),

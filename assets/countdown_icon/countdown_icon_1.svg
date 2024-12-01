@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="59px" viewBox="0 0 59 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组</title>
+    <defs>
+        <radialGradient cx="77.3709755%" cy="77.0606729%" fx="77.3709755%" fy="77.0606729%" r="95.3321495%" gradientTransform="translate(0.7737, 0.7706), scale(0.9708, 1), rotate(-146.7216), translate(-0.7737, -0.7706)" id="radialGradient-1">
+            <stop stop-color="#FF6B5D" offset="0%"></stop>
+            <stop stop-color="#FDBFB1" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="0%" y1="78.9799319%" x2="78.5154903%" y2="41.3584553%" id="linearGradient-2">
+            <stop stop-color="#FFD3CC" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标修改" transform="translate(-20, -385)">
+            <g id="编组" transform="translate(20, 385)">
+                <g id="编组-8" transform="translate(12, 8)">
+                    <g id="编组-4备份-2" transform="translate(18, 23) scale(-1, 1) translate(-18, -23)">
+                        <line x1="10.3419643" y1="29.1236941" x2="10.3419643" y2="42.4373828" id="路径-2" stroke="#000000" stroke-width="3.4619548"></line>
+                        <path d="M21.4285714,28.7263564 C21.4285714,27.8817741 21.4285714,27.459483 21.4285714,27.459483 C21.4285714,27.459483 21.4285714,30.028261 21.4285714,35.1658168 L29.1428571,41.6052773" id="路径-3" stroke="#000000" stroke-width="3.4619548"></path>
+                        <rect id="矩形" fill="#FFFFFF" x="2.57142857" y="39.9410662" width="10.2857143" height="4.16052773" rx="2.08026386"></rect>
+                        <path d="M22.6636469,39.8976933 L28.7184087,39.963729 C29.880404,39.9764021 30.8193636,40.9151566 30.8322906,42.0771491 C30.8448557,43.2066055 29.9394364,44.1323969 28.80998,44.144962 C28.794962,44.145129 28.7799426,44.1451307 28.7649246,44.1449669 L22.7101627,44.0789312 C21.5481674,44.066258 20.6092079,43.1275036 20.5962808,41.965511 C20.5837157,40.8360546 21.489135,39.9102633 22.6185914,39.8976982 C22.6336094,39.8975311 22.6486288,39.8975295 22.6636469,39.8976933 Z" id="矩形备份-2" fill="#FFFFFF" transform="translate(25.7143, 42.0213) rotate(-24) translate(-25.7143, -42.0213)"></path>
+                        <ellipse id="椭圆形" fill="url(#radialGradient-1)" cx="16.7142857" cy="16.2260581" rx="16.7142857" ry="16.2260581"></ellipse>
+                        <ellipse id="椭圆形" fill="url(#linearGradient-2)" transform="translate(9, 13.7297) scale(-1, 1) translate(-9, -13.7297)" cx="9" cy="13.7297415" rx="3.85714286" ry="3.74447496"></ellipse>
+                        <ellipse id="椭圆形" fill="#000000" transform="translate(6.8571, 13.7297) scale(-1, 1) translate(-6.8571, -13.7297)" cx="6.85714286" cy="13.7297415" rx="1.71428571" ry="2.08026386"></ellipse>
+                        <ellipse id="椭圆形备份" fill="url(#linearGradient-2)" transform="translate(15.8571, 13.7297) scale(-1, 1) translate(-15.8571, -13.7297)" cx="15.8571429" cy="13.7297415" rx="3.85714286" ry="3.74447496"></ellipse>
+                        <ellipse id="椭圆形备份-2" fill="#000000" transform="translate(13.7143, 13.7297) scale(-1, 1) translate(-13.7143, -13.7297)" cx="13.7142857" cy="13.7297415" rx="1.71428571" ry="2.08026386"></ellipse>
+                        <path d="M12,23.2989553 C13.8935477,23.2989553 15.4285714,21.7585174 15.4285714,19.8582909 C15.4285714,17.9580644 13.8935477,18.3371577 12,18.3371577 C10.1064523,18.3371577 8.57142857,17.9580644 8.57142857,19.8582909 C8.57142857,21.7585174 10.1064523,23.2989553 12,23.2989553 Z" id="椭圆形" fill="#000000"></path>
+                        <rect id="矩形" fill="#FFFFFF" x="10.2857143" y="18.306322" width="1.71428571" height="1.66421109"></rect>
+                        <rect id="矩形备份" fill="#FFFFFF" x="12" y="18.306322" width="1.71428571" height="1.66421109"></rect>
+                        <path d="M5.14285714,3.67306873 C5.14285714,3.67306873 17.914967,9.68633455 27.2266222,8.65190925 C36.5382775,7.61748395 34.2399255,2.31108984 30.6192944,1.70915887 C26.9986632,1.1072279 21.0277358,6.60460248 36,14.9778998" id="路径" stroke="#000000" stroke-width="3.00036083" stroke-linecap="round"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

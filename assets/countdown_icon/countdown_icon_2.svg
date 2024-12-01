@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="59px" viewBox="0 0 59 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 2</title>
+    <defs>
+        <radialGradient cx="29.1957299%" cy="69.9223522%" fx="29.1957299%" fy="69.9223522%" r="123.268313%" gradientTransform="translate(0.292, 0.6992), scale(0.6767, 1), rotate(-31.1931), translate(-0.292, -0.6992)" id="radialGradient-1">
+            <stop stop-color="#F978C4" offset="0%"></stop>
+            <stop stop-color="#FBC0EA" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="1.47089392%" y1="80.7501294%" x2="77.676625%" y2="40.8305989%" id="linearGradient-2">
+            <stop stop-color="#FFCCE1" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标修改" transform="translate(-88, -385)">
+            <g id="编组-2" transform="translate(88, 385)">
+                <rect id="矩形备份-8" x="0" y="0" width="59" height="59" rx="12"></rect>
+                <g id="编组-5" transform="translate(29.5, 29.5) scale(-1, 1) translate(-29.5, -29.5)translate(15, 8)">
+                    <path d="M-2.07832084,36.0244444 C-4.7765052,36.0244444 -6.96381579,33.8371339 -6.96381579,31.1389495 C-6.96381579,28.4407651 -4.7765052,26.2534545 -2.07832084,26.2534545 L-1.81815338,26.2534545 C-4.51633773,26.2534545 -6.70364833,24.066144 -6.70364833,21.3679596 C-6.70364833,19.0584632 -5.1011345,17.123254 -2.94740086,16.613626 C-5.1011345,16.1057561 -6.70364833,14.1705469 -6.70364833,11.8610505 C-6.70364833,9.16286615 -4.51633773,6.97555556 -1.81815338,6.97555556 L21.6304825,6.97555556 C29.5465639,6.97555556 35.9638158,13.3928075 35.9638158,21.3088889 L35.9638158,21.6911111 C35.9638158,29.6071925 29.5465639,36.0244444 21.6304825,36.0244444 L-2.07832084,36.0244444 Z" id="形状结合" fill="url(#radialGradient-1)" transform="translate(14.5, 21.5) rotate(-90) translate(-14.5, -21.5)"></path>
+                    <ellipse id="椭圆形" fill="url(#linearGradient-2)" transform="translate(8.6462, 15.9543) scale(-1, 1) translate(-8.6462, -15.9543)" cx="8.64623206" cy="15.954303" rx="3.38217703" ry="3.43305051"></ellipse>
+                    <ellipse id="椭圆形" fill="#000000" transform="translate(6.8251, 15.9543) scale(-1, 1) translate(-6.8251, -15.9543)" cx="6.82505981" cy="15.954303" rx="1.56100478" ry="1.58448485"></ellipse>
+                    <ellipse id="椭圆形备份" fill="url(#linearGradient-2)" transform="translate(14.6301, 15.9543) scale(-1, 1) translate(-14.6301, -15.9543)" cx="14.6300837" cy="15.954303" rx="3.38217703" ry="3.43305051"></ellipse>
+                    <ellipse id="椭圆形备份-2" fill="#000000" transform="translate(13.0691, 15.9543) scale(-1, 1) translate(-13.0691, -15.9543)" cx="13.0690789" cy="15.954303" rx="1.56100478" ry="1.58448485"></ellipse>
+                    <rect id="矩形" stroke="#000000" stroke-width="1.46305157" x="2.66238038" y="9.88044444" width="8.06519139" height="12.1477172" rx="4.03259569"></rect>
+                    <rect id="矩形备份-41" stroke="#000000" stroke-width="1.46305157" x="11.2479067" y="9.88044444" width="8.06519139" height="12.1477172" rx="4.03259569"></rect>
+                    <path d="M8.90639952,4.07066667 C19.3769162,6.30675635 26.0013527,5.82260821 28.7797092,2.61822222" id="路径-6" stroke="#000000" stroke-width="2.86666667" stroke-linecap="round"></path>
+                    <ellipse id="椭圆形" fill="#000000" cx="18.0122608" cy="26.3854949" rx="2.86184211" ry="2.50876768"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
