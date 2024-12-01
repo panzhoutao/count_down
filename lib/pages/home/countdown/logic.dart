@@ -40,7 +40,20 @@ class HomeCountdownLogic extends GetxController {
       update();
     });
     countdownService.dataList.listenAndPump((value) {
-      _allItems = value;
+      _allItems = countdownService.visibleList;
+      // 按照置顶时间排序
+      _allItems.sort((a, b) {
+        if (a.topDateTime == null && b.topDateTime == null) {
+          return 0;
+        } else if (a.topDateTime == null && b.topDateTime != null) {
+          return 1;
+        } else if (a.topDateTime != null && b.topDateTime == null) {
+          return -1;
+        }
+        var aTime = DateTime.parse(a.topDateTime!);
+        var bTime = DateTime.parse(b.topDateTime!);
+        return bTime.compareTo(aTime);
+      });
       _changeItems();
     });
     super.onInit();

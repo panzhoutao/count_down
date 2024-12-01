@@ -16,6 +16,12 @@ class CountdownDetailLogic extends GetxController {
   ///
   late DbCountdownEntity data;
 
+  @override
+  void onInit() {
+    updateData();
+    super.onInit();
+  }
+
   ///
   void updateData() {
     data = CountdownService.to.findByKey(keyId);

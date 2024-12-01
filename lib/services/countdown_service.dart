@@ -9,6 +9,11 @@ class CountdownService extends GetxService {
   ///
   var dataList = <DbCountdownEntity>[].obs;
 
+  /// 可见的列表（未完成）
+  List<DbCountdownEntity> get visibleList {
+    return dataList.where((element) => !element.isDone).toList();
+  }
+
   @override
   void onInit() {
     updateList();

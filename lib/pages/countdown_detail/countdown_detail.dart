@@ -34,12 +34,6 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   ///
   late CountdownDetailLogic _logic;
 
-  @override
-  void initState() {
-    _logic = Get.put(CountdownDetailLogic(widget.keyId));
-    super.initState();
-  }
-
   ///
   Widget _buildImage() {
     return Container();
@@ -215,7 +209,9 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
       ),
       body: () {
         return GetBuilder<CountdownDetailLogic>(
+          init: CountdownDetailLogic(widget.keyId),
           builder: (controller) {
+            _logic = controller;
             return Column(
               children: [
                 _buildImage(),
