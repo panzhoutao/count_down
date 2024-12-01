@@ -1,5 +1,6 @@
 import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/res/assets_res.dart';
+import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
 import 'package:count_down/widgets/picker/date_picker.dart';
@@ -85,8 +86,22 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
         _logic.setName(value);
       },
       textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 18.sp),
       decoration: InputDecoration(
         hintText: '请在这里输入事件名称',
+        hintStyle: TextStyle(color: Color(0xFF979797)),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: MyThemeData.instance.seedColor,
+            width: 2.w,
+          ), // 未获取焦点时的下划线颜色
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: MyThemeData.instance.seedColor,
+            width: 2.w,
+          ), // 获取焦点时的下划线颜色
+        ),
       ),
     );
   }
@@ -106,6 +121,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
             title: '提醒时间',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: _logic.timeText,
+            contentHintText: '全天',
             onTap: _selectTime,
           ),
         ],
@@ -122,18 +138,21 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
             title: '重复',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: _logic.repeatText,
+            contentHintText: '不重复',
             onTap: _selectRepeat,
           ),
           _listTile(
             title: '提前提醒',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: _logic.remindAdvanceText,
+            contentHintText: '未设置',
             onTap: _selectTimingReminder,
           ),
           _listTile(
             title: '标签',
             icon: AssetsRes.SETTINGS_TAG,
             contentText: _logic.tagText,
+            contentHintText: '无',
             onTap: _selectTag,
           ),
         ],
@@ -143,7 +162,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 
   ///
   Widget _actionWidget() {
-    if(widget.entity?.key == null) {
+    if (widget.entity?.key == null) {
       return ElevatedButton(
         onPressed: () {
           _logic.save();
@@ -173,7 +192,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
             _logic = controller;
             return Column(
               children: [
-                _buildName(),
+                _buildName().paddingSymmetric(vertical: 25.w, horizontal: 30.w),
                 _buildContainer1(),
                 _buildContainer2(),
               ],
@@ -189,7 +208,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 Widget _container(Widget child) {
   return Container(
     // padding: EdgeInsets.symmetric(horizontal: 30.w),
-    margin: EdgeInsets.only(top: 20.w),
+    margin: EdgeInsets.only(bottom: 20.w),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(16.w),
@@ -202,19 +221,28 @@ Widget _container(Widget child) {
 Widget _listTile({
   required String title,
   required String icon,
-  required String contentText,
+  String? contentText,
+  String? contentHintText,
   required Function() onTap,
 }) {
+  String text = contentText ?? contentHintText ?? '';
+  Color textColor = contentText == null ? Color(0xFF989898) : Colors.black;
   return ListTile(
     leading: SvgPicture.asset(icon),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(contentText),
-        Icon(Icons.arrow_drop_down),
+        Text(
+          text,
+          style: TextStyle(fontSize: 14.sp, color: textColor),
+        ),
+        Icon(Icons.arrow_drop_down,color: Color(0xFF989898)),
       ],
     ),
-    title: Text(title),
+    title: Text(
+      title,
+      style: TextStyle(fontSize: 14.sp, color: Color(0xFF979797)),
+    ),
     onTap: onTap,
   );
 }

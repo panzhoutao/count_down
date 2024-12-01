@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       },
       icon: Icon(
         Icons.settings,
-        size: 26,
+        size: 26.w,
         color: Colors.black,
       ),
     );
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   alignment: Alignment.topRight,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: EdgeInsets.only(top: 20.w ,right: 10.w),
                   child: _buildSetting(),
                 ),
                 Container(

@@ -68,8 +68,8 @@ class HomeCountdownItemWidget extends StatelessWidget {
     return Text(
       data.tipText ?? '',
       style: TextStyle(
-          // fontSize: 44.sp,
-          ),
+        fontSize: 16.sp,
+      ),
     );
   }
 
@@ -92,7 +92,7 @@ class HomeCountdownItemWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         '天',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white, fontSize: 16.sp),
       ),
     );
   }

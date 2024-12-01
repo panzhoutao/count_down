@@ -24,7 +24,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<MyAppBar> createState() => _MyAppBarState();
 
   @override
-  Size get preferredSize => Size(double.infinity, 50);
+  Size get preferredSize => Size(double.infinity, 64.w);
 }
 
 class _MyAppBarState extends State<MyAppBar> {
@@ -39,20 +39,26 @@ class _MyAppBarState extends State<MyAppBar> {
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Container(
-        height: 64.w,
         color: MyThemeData.instance.backgroundColor,
         child: Stack(
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: widget.leftWidget ?? TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  '取消',
-                ),
-              ),
+              child: widget.leftWidget ??
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      foregroundColor: Color(0xFF000000).withOpacity(0.5),
+                      textStyle: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('取消'),
+                  ),
             ),
             Align(
               alignment: Alignment.centerRight,

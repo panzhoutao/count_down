@@ -80,8 +80,21 @@ class _HomeCountdownWidgetState extends State<HomeCountdownWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(AssetsRes.EMPTY_DATA),
-          Text('暂无倒数日'),
-          Text('点击“+”按钮进行创建'),
+          SizedBox(height: 20.w),
+          Text(
+            '暂无倒数日',
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Color(0xFF919191),
+            ),
+          ),
+          Text(
+            '点击“+”按钮进行创建',
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: Color(0xFF919191),
+            ),
+          ),
         ],
       );
     }
@@ -192,6 +205,7 @@ class _TagItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 14.w),
         decoration: BoxDecoration(
           color: selected ? Colors.blue : Color(0xFFD8D8D8),
           borderRadius: BorderRadius.only(

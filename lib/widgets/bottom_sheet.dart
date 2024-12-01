@@ -54,6 +54,12 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              textStyle: TextStyle(fontSize: 18.sp),
+              backgroundColor: Color(0xFFD8D8D8),
+              foregroundColor: Color(0xFF919191),
+              padding: EdgeInsets.symmetric(vertical: 15.w),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -61,6 +67,10 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           ).expand(),
           SizedBox(width: 43.w),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              textStyle: TextStyle(fontSize: 18.sp),
+              padding: EdgeInsets.symmetric(vertical: 15.w),
+            ),
             onPressed: () {
               widget.onConfirm();
             },

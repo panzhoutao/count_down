@@ -1,8 +1,8 @@
 class RemindAdvanceUtils {
   ///
-  static String getRemindAdvanceText(int? value) {
+  static String? getRemindAdvanceText(int? value) {
     if (value == null) {
-      return '未设置';
+      return null;
     }
     switch (value) {
       case 0:

@@ -27,9 +27,9 @@ class EditCountdownController extends GetxController {
   String get dateText => formatDate(_dateTime, [yyyy, '-', mm, '-', dd]);
 
   ///
-  String get timeText {
+  String? get timeText {
     if (entity?.isAllDay ?? true) {
-      return '全天';
+      return null;
     } else {
       return formatDate(_dateTime, [HH, ':', nn]);
     }
@@ -41,17 +41,16 @@ class EditCountdownController extends GetxController {
   }
 
   ///
-  String get remindAdvanceText {
+  String? get remindAdvanceText {
     return RemindAdvanceUtils.getRemindAdvanceText(entity!.remindAdvance);
   }
 
   ///
-  String get tagText {
+  String? get tagText {
     if (entity?.tagKey != null) {
       return TagService.to.findTagByKey(entity!.tagKey!).name!;
-    } else {
-      return '无';
     }
+    return null;
   }
 
   @override
@@ -134,7 +133,6 @@ class EditCountdownController extends GetxController {
       });
     }
   }
-
 }
 
 ///

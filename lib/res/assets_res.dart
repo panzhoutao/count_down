@@ -11,5 +11,9 @@ class AssetsRes {
   static const String EMPTY_DATA = 'assets/images/empty_data.svg';
   static const String ITEM_DELETE = 'assets/images/item_delete.svg';
   static const String ITEM_TOP = 'assets/images/item_top.svg';
+  static const String SETTINGS_AGREEMENT = 'assets/images/settings_agreement.svg';
+  static const String SETTINGS_FOLLOW = 'assets/images/settings_follow.svg';
+  static const String SETTINGS_PRIVACY = 'assets/images/settings_privacy.svg';
+  static const String SETTINGS_REVIEW = 'assets/images/settings_review.svg';
   static const String SETTINGS_TAG = 'assets/images/settings_tag.svg';
 }

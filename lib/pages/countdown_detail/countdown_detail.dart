@@ -116,7 +116,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildTip() {
     return _container(
       title: '提醒',
-      value: RemindAdvanceUtils.getRemindAdvanceText(_logic.data.remindAdvance),
+      value: RemindAdvanceUtils.getRemindAdvanceText(_logic.data.remindAdvance)?? '未设置',
     );
   }
 

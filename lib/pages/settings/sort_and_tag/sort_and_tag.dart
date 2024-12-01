@@ -1,5 +1,6 @@
 import 'package:count_down/pages/add_tag/add_tag.dart';
 import 'package:count_down/pages/settings/sort_and_tag/logic.dart';
+import 'package:count_down/res/assets_res.dart';
 import 'package:count_down/router_manage.dart';
 import 'package:count_down/services/tag_service.dart';
 import 'package:count_down/widgets/base_state.dart';
@@ -9,6 +10,7 @@ import 'package:count_down/widgets/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
 import 'package:get/get.dart';
 
@@ -53,27 +55,33 @@ class _SortAndTagPageState extends BaseState<SortAndTagPage> {
                       color: Colors.red,
                       shape: BoxShape.circle,
                     ),
-                    child: IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
+                    child: GestureDetector(
+                      onTap: () {
                         _logic.delete(item);
                       },
+                      child: SvgPicture.asset(AssetsRes.ITEM_DELETE),
                     ),
                   ),
                 ],
               ),
               child: Container(
                 height: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal :16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.menu),
-                    Text('${item.name}'),
+                    Icon(
+                      Icons.menu,
+                      color: Color(0xFFD8D8D8),
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      '${item.name}',
+                      style: TextStyle(fontSize: 15.sp),
+                    ),
                   ],
                 ),
               ),

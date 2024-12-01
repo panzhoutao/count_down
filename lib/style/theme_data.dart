@@ -39,6 +39,20 @@ class MyThemeData {
           foregroundColor: Colors.white,
           shape: CircleBorder(),
         ),
+        elevatedButtonTheme: elevatedButtonThemeData,
+      );
+
+  ElevatedButtonThemeData get elevatedButtonThemeData =>
+      ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(Colors.black),
+          foregroundColor: WidgetStateProperty.all(Colors.white),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.w),
+            ),
+          ),
+        ),
       );
 
 // ///

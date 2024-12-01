@@ -103,7 +103,7 @@ class _TimingReminderPickerWidgetState
               children: [
                 Icon(icon),
                 SizedBox(width: 12),
-                Text(RemindAdvanceUtils.getRemindAdvanceText(_items[index])),
+                Text(RemindAdvanceUtils.getRemindAdvanceText(_items[index]) ?? '未设置'),
               ],
             ),
           ),

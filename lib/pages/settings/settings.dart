@@ -36,6 +36,29 @@ class _SettingsPageState extends BaseState<SettingsPage> {
           );
         },
       ),
+      _Item(
+        title: '给我们好评',
+        icon: AssetsRes.SETTINGS_REVIEW,
+        onTap: () {},
+      ),
+    ];
+
+    _items2 = [
+      _Item(
+        title: '关注我们',
+        icon: AssetsRes.SETTINGS_FOLLOW,
+        onTap: () {},
+      ),
+      _Item(
+        title: '隐私协议',
+        icon: AssetsRes.SETTINGS_PRIVACY,
+        onTap: () {},
+      ),
+      _Item(
+        title: '使用协议',
+        icon: AssetsRes.SETTINGS_AGREEMENT,
+        onTap: () {},
+      ),
     ];
     super.initState();
   }
@@ -74,6 +97,7 @@ class _SettingsPageState extends BaseState<SettingsPage> {
               children: [
                 _buildTitle(),
                 _buildItems(_items1),
+                _buildItems(_items2),
               ],
             ),
           );
@@ -114,7 +138,13 @@ Widget _listTile(_Item item) {
   return ListTile(
     leading: SvgPicture.asset(item.icon),
     trailing: Icon(Icons.arrow_right),
-    title: Text(item.title),
+    title: Text(
+      item.title,
+      style: TextStyle(
+        fontSize: 14.sp,
+        color: Color(0xFF979797),
+      ),
+    ),
     onTap: item.onTap,
   );
 }

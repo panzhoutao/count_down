@@ -41,8 +41,8 @@ class _AddTagPageState extends BaseState<AddTagPage> {
   Widget build(BuildContext context) {
     return MyScaffold(
       appBar: MyAppBar(
-        rightWidget: GestureDetector(
-          onTap: () {},
+        rightWidget: Container(
+          margin: EdgeInsets.only(right: 10.w),
           child: ElevatedButton(
             onPressed: () {
               if (_textController.text.isNotEmpty) {
