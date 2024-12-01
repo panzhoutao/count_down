@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
 import 'package:get/get.dart';
+import 'package:screenshot/screenshot.dart';
 
 import 'logic.dart';
 
@@ -49,7 +50,9 @@ class _SharePageState extends State<SharePage> {
       color: Colors.white,
       padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: Get.width / 4),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          logic.saveImage();
+        },
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 15.w),
         ),
@@ -60,9 +63,12 @@ class _SharePageState extends State<SharePage> {
 
   ///
   Widget _buildContent() {
-    return _ContentWidget(
-      data: widget.data,
-      asset: bgResList[bgResIndex],
+    return Screenshot(
+      controller: logic.screenshotController,
+      child: _ContentWidget(
+        data: widget.data,
+        asset: bgResList[bgResIndex],
+      ),
     ).paddingSymmetric(vertical: 20.w);
   }
 
