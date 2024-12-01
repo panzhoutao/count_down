@@ -215,9 +215,7 @@ class _TagItemWidget extends StatelessWidget {
             bottomLeft: Radius.circular(6.w),
           ),
         ),
-        constraints: BoxConstraints(
-          minWidth: 70.w,
-        ),
+        constraints: BoxConstraints(minWidth: 70.w),
         alignment: Alignment.center,
         child: Text(
           title,

@@ -1,3 +1,4 @@
+import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,7 +57,7 @@ class _TimingReminderPickerWidgetState
   ///
   void _changeValue() {
     if (_isOpen) {
-       widget.onChange?.call(_items[_selectedIndex]);
+      widget.onChange?.call(_items[_selectedIndex]);
     } else {
       widget.onChange?.call(null);
     }
@@ -66,10 +67,11 @@ class _TimingReminderPickerWidgetState
   Widget _buildOpen() {
     return Row(
       children: [
-        Text('已开启'),
+        Text('已开启', style: TextStyle(fontSize: 18.sp)),
         Spacer(),
         CupertinoSwitch(
           value: _isOpen,
+          activeColor: MyThemeData.instance.seedColor,
           onChanged: (value) {
             setState(() {
               _isOpen = value;
@@ -87,9 +89,9 @@ class _TimingReminderPickerWidgetState
       shrinkWrap: true,
       itemCount: _items.length,
       itemBuilder: (context, index) {
-        IconData icon = _selectedIndex == index
-            ? Icons.check_circle
-            : Icons.radio_button_unchecked_outlined;
+        Icon icon = _selectedIndex == index
+            ? Icon(Icons.check_circle, color: MyThemeData.instance.seedColor)
+            : Icon(Icons.radio_button_unchecked_outlined);
         return GestureDetector(
           onTap: () {
             setState(() {
@@ -101,9 +103,13 @@ class _TimingReminderPickerWidgetState
             height: 45.w,
             child: Row(
               children: [
-                Icon(icon),
+                icon,
                 SizedBox(width: 12),
-                Text(RemindAdvanceUtils.getRemindAdvanceText(_items[index]) ?? '未设置'),
+                Text(
+                  RemindAdvanceUtils.getRemindAdvanceText(_items[index]) ??
+                      '未设置',
+                  style: TextStyle(fontSize: 18.sp),
+                ),
               ],
             ),
           ),
@@ -119,6 +125,7 @@ class _TimingReminderPickerWidgetState
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(height: 20.w),
           _buildOpen(),
           _buildList(),
         ],

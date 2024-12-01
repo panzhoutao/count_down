@@ -16,4 +16,10 @@ class AssetsRes {
   static const String SETTINGS_PRIVACY = 'assets/images/settings_privacy.svg';
   static const String SETTINGS_REVIEW = 'assets/images/settings_review.svg';
   static const String SETTINGS_TAG = 'assets/images/settings_tag.svg';
+  static const String SHARE_TAG = 'assets/images/share_tag.svg';
+  static const String SHARE_BG_1 = 'assets/shareBg/share_bg_1.webp';
+  static const String SHARE_BG_2 = 'assets/shareBg/share_bg_2.webp';
+  static const String SHARE_BG_3 = 'assets/shareBg/share_bg_3.webp';
+  static const String SHARE_BG_4 = 'assets/shareBg/share_bg_4.webp';
+  static const String SHARE_BG_5 = 'assets/shareBg/share_bg_5.webp';
 }

@@ -32,6 +32,7 @@ dependencies:
   scroll_wheel_date_picker: 0.0.2+1
   sqflite: 2.4.1
   date_format: 2.0.9
+  dotted_line: 3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,12 @@ flutter:
     - assets/images/settings_privacy.svg
     - assets/images/settings_review.svg
     - assets/images/settings_tag.svg
+    - assets/images/share_tag.svg
+    - assets/shareBg/share_bg_1.webp
+    - assets/shareBg/share_bg_2.webp
+    - assets/shareBg/share_bg_3.webp
+    - assets/shareBg/share_bg_4.webp
+    - assets/shareBg/share_bg_5.webp
 
 flutter_intl:
   enabled: true

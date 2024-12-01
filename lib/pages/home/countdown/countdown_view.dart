@@ -78,7 +78,8 @@ class HomeCountdownItemWidget extends StatelessWidget {
     return Text(
       '${data.differenceDays == 0 ? '今天' : data.differenceDays}',
       style: TextStyle(
-        fontSize: 44.sp,
+        fontSize: 34.sp,
+        fontWeight: FontWeight.w600,
       ),
     );
   }

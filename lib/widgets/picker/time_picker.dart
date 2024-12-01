@@ -1,3 +1,4 @@
+import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/widgets/bottom_sheet.dart';
 import 'package:count_down/widgets/picker/picker.dart';
 import 'package:flutter/material.dart';
@@ -93,18 +94,18 @@ class _MyTimePickerWidgetState extends State<MyTimePickerWidget> {
     required String title,
     required Function() onTap,
   }) {
-    IconData icon = _type == type
-        ? Icons.check_circle
-        : Icons.radio_button_unchecked_outlined;
+    Icon icon = _type == type
+        ? Icon(Icons.check_circle, color: MyThemeData.instance.seedColor)
+        : Icon(Icons.radio_button_unchecked_outlined);
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 45.w,
+        height: 50.w,
         child: Row(
           children: [
-            Icon(icon),
+            icon,
             SizedBox(width: 12),
-            Text(title),
+            Text(title, style: TextStyle(fontSize: 18.sp)),
           ],
         ),
       ),

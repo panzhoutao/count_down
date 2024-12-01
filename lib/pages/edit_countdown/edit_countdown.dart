@@ -183,7 +183,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
   Widget build(BuildContext context) {
     return MyScaffold(
       appBar: MyAppBar(
-        rightWidget: _actionWidget(),
+        rightWidget: _actionWidget().paddingOnly(right: 10.w),
       ),
       body: () {
         return GetBuilder<EditCountdownController>(

@@ -1,6 +1,6 @@
-import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/pages/countdown_detail/logic.dart';
 import 'package:count_down/pages/edit_countdown/edit_countdown.dart';
+import 'package:count_down/pages/share/share/view.dart';
 import 'package:count_down/router_manage.dart';
 import 'package:count_down/services/countdown_service.dart';
 import 'package:count_down/services/tag_service.dart';
@@ -36,7 +36,12 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
 
   ///
   Widget _buildImage() {
-    return Container();
+    return Container(
+      width: 92.w,
+      height: 92.w,
+      margin: EdgeInsets.only(top: 40.w),
+      child: Placeholder(),
+    );
   }
 
   ///
@@ -44,10 +49,17 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
     return Container(
       width: double.infinity,
       color: Colors.white,
-      padding: EdgeInsets.symmetric(vertical: 20.w),
+      padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: Get.width / 4),
       child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(),
+        onPressed: () {
+          showCupertinoModalSheet(
+            context: context,
+            builder: (context) => SharePage(data: _logic.data),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 15.w),
+        ),
         child: Text('分享'),
       ),
     );
@@ -69,7 +81,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
           TextSpan(
             text: _logic.data.name,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
           ),
@@ -86,9 +98,33 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildCountDays() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20.w),
-      child: Text(_logic.data.differenceDays == 0
-          ? '今天'
-          : '${_logic.data.differenceDays}天'),
+      // child: Text(_logic.data.differenceDays == 0
+      //     ? '今天'
+      //     : '${_logic.data.differenceDays}天'),
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(fontSize: 50.sp),
+          children: [
+            TextSpan(
+              text: _logic.data.differenceDays == 0
+                  ? '今天'
+                  : '${_logic.data.differenceDays}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            if (_logic.data.differenceDays != 0)
+              TextSpan(
+                text: ' 天',
+                style: TextStyle(
+                  color: Color(0xFF989898),
+                  fontSize: 18.sp,
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -116,7 +152,9 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
   Widget _buildTip() {
     return _container(
       title: '提醒',
-      value: RemindAdvanceUtils.getRemindAdvanceText(_logic.data.remindAdvance)?? '未设置',
+      value:
+          RemindAdvanceUtils.getRemindAdvanceText(_logic.data.remindAdvance) ??
+              '未设置',
     );
   }
 
@@ -215,6 +253,7 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
             return Column(
               children: [
                 _buildImage(),
+                SizedBox(height: 20.w),
                 _buildContent(),
                 _buildCountDays(),
                 Row(
