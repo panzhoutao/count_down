@@ -21,20 +21,19 @@ dependencies:
   logger: 2.5.0
   shared_preferences: 2.3.3
   flutter_keyboard_visibility: 6.0.0
-  flutter_svg: 2.0.14
+  flutter_svg: 2.0.16
   flutter_utils_code:
     git:
       url: https://github.com/panzhoutao/flutter_utils_code.git
       ref: 0.1.3
   flutter_slidable: ^3.1.1
-  scroll_datetime_picker: 0.1.2
-  # TODO : 有时间把 scroll_wheel_date_picker 删掉
-  scroll_wheel_date_picker: 0.0.2+1
+  scroll_wheel_date_picker: ^0.0.2+1
   sqflite: 2.4.1
   date_format: 2.0.9
+  scroll_datetime_picker: 0.1.2
   dotted_line: 3.2.3
-  image_gallery_saver_plus: 3.0.5
   screenshot: 3.0.0
+  image_gallery_saver_plus: 3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +49,7 @@ flutter:
     - assets/countdown_icon/countdown_icon_3.svg
     - assets/countdown_icon/countdown_icon_4.svg
     - assets/countdown_icon/countdown_icon_5.svg
+    - assets/images/edit_countdown_edit_icon.svg
     - assets/images/empty_data.svg
     - assets/images/item_delete.svg
     - assets/images/item_top.svg

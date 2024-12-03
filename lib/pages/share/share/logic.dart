@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:count_down/utils/toast_utils.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';

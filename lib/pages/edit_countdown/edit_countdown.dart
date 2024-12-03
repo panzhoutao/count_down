@@ -183,9 +183,14 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
   ///
   Widget _buildIcon() {
     return Container(
-      height: 100.w,
-      width: 100.w,
-      child: CountdownIcon(),
+      height: 110.w,
+      width: 110.w,
+      child: Stack(
+        children: [
+          CountdownIcon(),
+          SvgPicture.asset(AssetsRes.EDIT_COUNTDOWN_EDIT_ICON),
+        ],
+      ),
     );
   }
 

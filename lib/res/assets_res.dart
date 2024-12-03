@@ -13,6 +13,7 @@ class AssetsRes {
   static const String COUNTDOWN_ICON_3 = 'assets/countdown_icon/countdown_icon_3.svg';
   static const String COUNTDOWN_ICON_4 = 'assets/countdown_icon/countdown_icon_4.svg';
   static const String COUNTDOWN_ICON_5 = 'assets/countdown_icon/countdown_icon_5.svg';
+  static const String EDIT_COUNTDOWN_EDIT_ICON = 'assets/images/edit_countdown_edit_icon.svg';
   static const String EMPTY_DATA = 'assets/images/empty_data.svg';
   static const String ITEM_DELETE = 'assets/images/item_delete.svg';
   static const String ITEM_TOP = 'assets/images/item_top.svg';
