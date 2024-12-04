@@ -5,25 +5,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 ///
 class CountdownIcon extends StatelessWidget {
-  CountdownIcon({
+  const CountdownIcon({
     super.key,
+    this.asset,
+    this.color,
   });
 
   ///
-  final String asset = AssetsRes.COUNTDOWN_ICON_1;
+  final String? asset;
 
   ///
-  final Color color = Color(0xFFFBE1ED);
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? Color(0xFFFBE1ED),
         borderRadius: BorderRadius.circular(18.r),
       ),
       child: SvgPicture.asset(
-        asset,
+        asset ?? AssetsRes.COUNTDOWN_ICON_1,
       ),
     );
   }

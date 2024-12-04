@@ -1,5 +1,7 @@
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/pages/icon_edit/icon_edit/view.dart';
 import 'package:count_down/res/assets_res.dart';
+import 'package:count_down/router_manage.dart';
 import 'package:count_down/style/theme_data.dart';
 import 'package:count_down/widgets/app_bar.dart';
 import 'package:count_down/widgets/base_state.dart';
@@ -182,14 +184,36 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
 
   ///
   Widget _buildIcon() {
-    return Container(
-      height: 110.w,
-      width: 110.w,
-      child: Stack(
-        children: [
-          CountdownIcon(),
-          SvgPicture.asset(AssetsRes.EDIT_COUNTDOWN_EDIT_ICON),
-        ],
+    return GestureDetector(
+      onTap: () {
+        showCupertinoModalSheet(
+          context: context,
+          builder: (context) => IconEditPage(
+            onConfirm: (String asset, Color color) {
+              // _logic.setIcon(asset, color);
+            },
+          ),
+        );
+      },
+      child: SizedBox(
+        height: 110.w,
+        width: 110.w,
+        child: Stack(
+          children: [
+            SizedBox(
+              width: 100.w,
+              height: 100.w,
+              child: CountdownIcon(),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: SvgPicture.asset(
+                AssetsRes.EDIT_COUNTDOWN_EDIT_ICON,
+                width: 25.w,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -253,7 +277,7 @@ Widget _listTile({
           text,
           style: TextStyle(fontSize: 14.sp, color: textColor),
         ),
-        Icon(Icons.arrow_drop_down,color: Color(0xFF989898)),
+        Icon(Icons.arrow_drop_down, color: Color(0xFF989898)),
       ],
     ),
     title: Text(
