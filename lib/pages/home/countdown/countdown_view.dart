@@ -1,4 +1,5 @@
 import 'package:count_down/entities/countdown_entity.dart';
+import 'package:count_down/style/icon.dart';
 import 'package:count_down/widgets/countdown_icon.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +33,15 @@ class HomeCountdownItemWidget extends StatelessWidget {
   final DbCountdownEntity data;
 
   Widget _buildHeader() {
-    return Container(
+    return SizedBox(
       height: 54.w,
       width: 54.w,
-      child: CountdownIcon(),
+      child: CountdownIcon(
+        asset: data.iconAsset,
+        color: data.iconColorValue == null
+            ? IconColor.defaultColor
+            : Color(data.iconColorValue!),
+      ),
     );
   }
 

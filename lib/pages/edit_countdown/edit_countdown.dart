@@ -190,7 +190,7 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
           context: context,
           builder: (context) => IconEditPage(
             onConfirm: (String asset, Color color) {
-              // _logic.setIcon(asset, color);
+              _logic.setIcon(asset, color.value);
             },
           ),
         );
@@ -203,7 +203,10 @@ class _EditCountdownPageState extends BaseState<EditCountdownPage> {
             SizedBox(
               width: 100.w,
               height: 100.w,
-              child: CountdownIcon(),
+              child: CountdownIcon(
+                asset: _logic.iconAsset,
+                color: _logic.iconColor,
+              ),
             ),
             Align(
               alignment: Alignment.bottomRight,

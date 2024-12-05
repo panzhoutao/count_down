@@ -99,6 +99,7 @@ class _IconEditPageState extends State<IconEditPage> {
             ),
             onPressed: () {
               widget.onConfirm(asset, color);
+              Navigator.of(context).pop();
             },
             child: Text('确定'),
           ).expand(),

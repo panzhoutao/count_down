@@ -41,7 +41,10 @@ class _CountdownDetailPageState extends BaseState<CountdownDetailPage> {
       width: 92.w,
       height: 92.w,
       margin: EdgeInsets.only(top: 40.w),
-      child: CountdownIcon(),
+      child: CountdownIcon(
+        asset: _logic.data.iconAsset,
+        color: _logic.data.iconColor,
+      ),
     );
   }
 

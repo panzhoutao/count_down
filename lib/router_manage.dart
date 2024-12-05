@@ -18,10 +18,7 @@ class RoutersManager {
     GetPage(name: splash, page: () => const SplashPage()),
     // GetPage(name: welcome, page: () => const WelcomePage()),
     GetPage(name: home, page: () => const HomePage()),
-    GetPage(
-      name: settings,
-      page: () => const SettingsPage(),
-    ),
+    GetPage(name: settings, page: () => const SettingsPage()),
   ];
 
   ///

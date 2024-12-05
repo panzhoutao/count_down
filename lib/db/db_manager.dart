@@ -42,6 +42,8 @@ class DbManager {
   final columnTagKey = 'tag_key';
   final columnIsDone = 'is_done';
   final columnTopDateTime = 'top_date_time';
+  final columnIconAsset = 'icon_asset';
+  final columnIconColorValue = 'icon_color_value';
 
   /// 打开数据库
   Future<Database> openDb() async {
@@ -84,7 +86,9 @@ class DbManager {
         $columnRemindAdvance INTEGER NULL, 
         $columnTagKey TEXT NULL,
         $columnIsDone INTEGER,
-        $columnTopDateTime TEXT
+        $columnTopDateTime TEXT,
+        $columnIconAsset TEXT,
+        $columnIconColorValue INTEGER
       )
     ''');
   }

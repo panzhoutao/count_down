@@ -2,6 +2,7 @@ import 'package:count_down/entities/countdown_entity.dart';
 import 'package:count_down/entities/tag_entity.dart';
 import 'package:count_down/services/countdown_service.dart';
 import 'package:count_down/services/tag_service.dart';
+import 'package:count_down/style/icon.dart';
 import 'package:count_down/utils/remind_advance_utils.dart';
 import 'package:count_down/utils/toast_utils.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
@@ -52,6 +53,14 @@ class EditCountdownController extends GetxController {
     }
     return null;
   }
+
+  ///
+  String get iconAsset => entity?.iconAsset ?? IconDataList.defaultIcon;
+
+  ///
+  Color get iconColor => entity?.iconColorValue != null
+      ? Color(entity!.iconColorValue!)
+      : IconColor.defaultColor;
 
   @override
   void onInit() {
@@ -109,6 +118,13 @@ class EditCountdownController extends GetxController {
     } else {
       entity?.tagKey = value.key;
     }
+    update();
+  }
+
+  ///
+  void setIcon(String asset, int iconColorValue) {
+    entity?.iconAsset = asset;
+    entity?.iconColorValue = iconColorValue;
     update();
   }
 

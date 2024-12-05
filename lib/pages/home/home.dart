@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_utils_code/flutter_utils_code.dart';
+import 'package:get/get.dart';
 
 ///
 class HomePage extends StatefulWidget {
@@ -17,6 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ///
+  bool isCalendarWidget = false;
+
   ///
   Widget _buildBackground() {
     return Container(
@@ -63,7 +67,9 @@ class _HomePageState extends State<HomePage> {
     String dateText = formatDate(DateTime.now(), [mm, '月', dd, '日']);
     return GestureDetector(
       onTap: () {
-        // Get.toNamed(RoutersManager.itemDetail);
+        setState(() {
+          isCalendarWidget = true;
+        });
       },
       child: Text(
         dateText,
@@ -90,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   alignment: Alignment.topRight,
-                  margin: EdgeInsets.only(top: 20.w ,right: 10.w),
+                  margin: EdgeInsets.only(top: 20.w, right: 10.w),
                   child: _buildSetting(),
                 ),
                 Container(

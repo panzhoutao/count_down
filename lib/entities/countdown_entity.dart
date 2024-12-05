@@ -3,6 +3,7 @@ import 'package:count_down/generated/json/base/json_convert_content.dart';
 import 'package:count_down/generated/json/base/json_field.dart';
 import 'package:count_down/generated/json/countdown_entity.g.dart';
 import 'package:count_down/widgets/picker/repeat_picker.dart';
+import 'package:flutter/material.dart';
 
 @JsonSerializable()
 class DbCountdownEntity {
@@ -35,6 +36,12 @@ class DbCountdownEntity {
   String? topDateTime;
 
   ///
+  String? iconAsset;
+
+  ///
+  int? iconColorValue;
+
+  ///
   DbCountdownEntity({
     this.key,
     this.name,
@@ -63,6 +70,8 @@ class DbCountdownEntity {
       DbManager().columnTagKey: tagKey,
       DbManager().columnIsDone: isDone ? 1 : 0,
       DbManager().columnTopDateTime: topDateTime,
+      DbManager().columnIconAsset: iconAsset,
+      DbManager().columnIconColorValue: iconColorValue,
     };
   }
 
@@ -113,6 +122,16 @@ class DbCountdownEntity {
         jsonConvert.convert<String>(json[DbManager().columnTopDateTime]);
     if (topDateTime != null) {
       dbTagEntity.topDateTime = topDateTime;
+    }
+    final String? iconAsset =
+        jsonConvert.convert<String>(json[DbManager().columnIconAsset]);
+    if (iconAsset != null) {
+      dbTagEntity.iconAsset = iconAsset;
+    }
+    final int? iconColorValue =
+        jsonConvert.convert<int>(json[DbManager().columnIconColorValue]);
+    if (iconColorValue != null) {
+      dbTagEntity.iconColorValue = iconColorValue;
     }
     return dbTagEntity;
   }
@@ -175,5 +194,13 @@ class DbCountdownEntity {
       targetDateTime.day,
     );
     return mTargetDateTime.difference(currentDate).inDays.abs();
+  }
+
+  ///
+  Color? get iconColor {
+    if (iconColorValue != null) {
+      return Color(iconColorValue!);
+    }
+    return null;
   }
 }
